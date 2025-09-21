@@ -155,3 +155,389 @@ main { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
     .content .description { font-size: 1rem; }
     .item:nth-child(2) { display: none; }
 }
+
+/* --- SECCIÓN ESTUDIOS --- */
+#estudios {
+    background-image: url('../assets/images/espacio.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto parallax al hacer scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 5%;
+    color: #fff;
+    position: relative;
+}
+
+/* Overlay de gradiente para un fondo más vivo y temático */
+#estudios::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente que va del morado al azul, uniendo ambos temas */
+    background-image: linear-gradient(
+        to right, 
+        rgba(151, 125, 255, 0.5), /* #977DFF con 50% de opacidad */
+        rgba(0, 51, 255, 0.6)     /* #0033FF con 60% de opacidad */
+    );
+    opacity: 0.8; /* Controla la intensidad general del gradiente */
+    z-index: 1;
+}
+
+/* Título de la sección (sin cambios) */
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenedor principal de las tablas (sin cambios) */
+.studies-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilo base para cada "tarjeta" de estudio con borde de gradiente */
+.study-card {
+    width: 45%;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(22, 22, 33, 0.6); /* Un fondo oscuro ligeramente azulado */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 2px solid transparent; /* El borde se manejará con border-image */
+}
+
+.study-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.study-card table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.study-card th, .study-card td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.study-card thead th {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Quitamos el borde de la última fila para un look más limpio */
+.study-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.study-card tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* --- COLORES Y GRADIENTES PERSONALIZADOS --- */
+
+/* Gradientes para Sofía */
+.sofia-card {
+    border-image: linear-gradient(135deg, #F2E6EE, #977DFF) 1;
+}
+.sofia-card h3 {
+    background-image: linear-gradient(135deg, #F2E6EE, #c3a1ff);
+}
+.sofia-card thead {
+    background-image: linear-gradient(to right, #c3a1ff, #977DFF);
+}
+
+/* Gradientes para Diego */
+.diego-card {
+    border-image: linear-gradient(135deg, #977DFF, #0033FF) 1;
+}
+.diego-card h3 {
+    background-image: linear-gradient(135deg, #89d1ff, #0033FF);
+}
+.diego-card thead {
+    background-image: linear-gradient(to right, #0033FF, #0600AB);
+}
+
+/* --- RESPONSIVE DESIGN PARA LA SECCIÓN ESTUDIOS --- */
+@media (max-width: 900px) {
+    .studies-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .study-card {
+        width: 90%;
+        max-width: 500px;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+
+/* --- ESTILOS SECCIÓN PASATIEMPOS --- */
+
+#pasatiempos {
+	/* Estilos base para centrar el carrusel y aplicar el fondo futurista */
+	font-family: "Exo 2", sans-serif;
+	background: radial-gradient(circle at center, #0f172a, #020617);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden; /* Importante para que los efectos no se salgan */
+	position: relative;
+}
+
+/* Efecto de rejilla en el fondo de la sección */
+#pasatiempos::before {
+	content: "";
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-image: linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+	background-size: 40px 40px;
+	background-position: center center;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+	animation: gridMove 60s linear infinite;
+	z-index: 0; /* Asegura que esté detrás del contenido */
+}
+
+@keyframes gridMove {
+	0% { background-position: 0px 0px; opacity: 0.5; }
+	50% { opacity: 0.2; }
+	100% { background-position: 40px 40px; opacity: 0.5; }
+}
+
+/* Variables de color para los efectos neon */
+:root {
+	--glow-primary: rgba(56, 189, 248, 0.7);
+	--neon-pink: rgba(236, 72, 153, 0.8);
+	--neon-blue: rgba(59, 130, 246, 0.8);
+	--neon-green: rgba(16, 185, 129, 0.8);
+}
+
+.carousel-container {
+	width: 90%;
+	max-width: 1100px;
+	position: relative;
+	perspective: 2000px;
+	padding: 3rem 0;
+	z-index: 10;
+}
+
+.carousel-track {
+	display: flex;
+	transition: transform 0.75s cubic-bezier(0.21, 0.61, 0.35, 1);
+	transform-style: preserve-3d;
+}
+
+.carousel-card {
+	min-width: 320px;
+	max-width: 320px;
+	margin: 0 25px;
+	background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
+	border-radius: 1.2rem;
+	overflow: hidden;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
+	transition: all 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
+	transform-origin: center center;
+	position: relative;
+	border: 1px solid rgba(94, 234, 212, 0.2);
+}
+
+/* Efecto de borde holográfico */
+.carousel-card::before {
+	content: "";
+	position: absolute;
+	inset: -2px;
+	background: linear-gradient(45deg, transparent 0%, var(--neon-blue) 25%, var(--neon-green) 50%, var(--neon-pink) 75%, transparent 100%);
+	z-index: -1;
+	border-radius: 1.3rem;
+	filter: blur(8px);
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	animation: borderGlow 6s linear infinite;
+}
+
+@keyframes borderGlow {
+	0% { background-position: 0% 50%; opacity: 0.3; }
+	50% { background-position: 100% 50%; opacity: 0.5; }
+	100% { background-position: 0% 50%; opacity: 0.3; }
+}
+
+.carousel-card.is-active::before {
+	opacity: 1;
+	background-size: 300% 300%;
+}
+
+.carousel-card:not(.is-active) {
+	transform: scale(0.8) rotateY(35deg) translateZ(-100px);
+	opacity: 0.45;
+	filter: saturate(0.6) brightness(0.7);
+}
+
+.carousel-card.is-prev {
+	transform-origin: right center;
+	transform: scale(0.75) rotateY(45deg) translateX(-80px) translateZ(-150px);
+}
+
+.carousel-card.is-next {
+	transform-origin: left center;
+	transform: scale(0.75) rotateY(-45deg) translateX(80px) translateZ(-150px);
+}
+
+.carousel-card.is-active {
+	transform: scale(1) rotateY(0) translateZ(0);
+	opacity: 1;
+	z-index: 20;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-primary), inset 0 0 20px rgba(56, 189, 248, 0.1);
+	filter: saturate(1.2) brightness(1.1);
+}
+
+.card-image-container {
+	position: relative;
+	height: 200px;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(94, 234, 212, 0.3);
+}
+
+.card-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 1.5s ease;
+}
+
+.carousel-card.is-active .card-image {
+	transform: scale(1.05);
+}
+
+.card-image-container::after {
+	content: "";
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	background: linear-gradient(120deg, rgba(56, 189, 248, 0.1), transparent 70%), radial-gradient(circle at 80% 20%, rgba(94, 234, 212, 0.15), transparent 50%);
+	pointer-events: none;
+}
+
+.card-image-container::before {
+	content: "";
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	background: repeating-linear-gradient(0deg, rgba(6, 182, 212, 0.05) 0px, rgba(6, 182, 212, 0.05) 1px, transparent 1px, transparent 4px);
+	pointer-events: none;
+	opacity: 0.5;
+	z-index: 5;
+}
+
+.card-content { padding: 1.75rem; color: #f1f5f9; }
+.card-title {
+	font-family: "Orbitron", sans-serif;
+	margin-bottom: 0.75rem;
+	letter-spacing: 1px;
+	position: relative;
+	display: inline-block;
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.card-title::after {
+	content: attr(data-text);
+	position: absolute; top: 0; left: 0;
+	color: transparent;
+	-webkit-text-stroke: 0.5px;
+	filter: blur(3px);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.carousel-card.is-active .card-title::after { opacity: 0.8; }
+.card-description {
+	font-size: 0.9rem;
+	line-height: 1.6;
+	color: rgba(241, 245, 249, 0.8);
+	font-weight: 300;
+}
+
+/* Colores de Títulos */
+.text-cyan-400 { color: #22d3ee; }
+.text-blue-400 { color: #60a5fa; }
+.text-purple-400 { color: #c084fc; }
+.text-pink-400 { color: #f472b6; }
+.title-gradient {
+    background-image: linear-gradient(to right, #60a5fa, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.carousel-button {
+	position: absolute; top: 50%; transform: translateY(-50%);
+	background: rgba(12, 74, 110, 0.3); color: #38bdf8;
+	border: 1px solid rgba(14, 165, 233, 0.4); border-radius: 50%;
+	width: 48px; height: 48px; display: flex;
+	justify-content: center; align-items: center; cursor: pointer;
+	z-index: 20; transition: all 0.3s ease;
+	backdrop-filter: blur(5px);
+	box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+.carousel-button:hover {
+	background-color: rgba(14, 165, 233, 0.3); color: #e0f2fe;
+	transform: translateY(-50%) scale(1.1);
+	box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+.carousel-button.prev { left: -24px; }
+.carousel-button.next { right: -24px; }
+
+.carousel-indicators {
+	display: flex; justify-content: center;
+	gap: 10px; margin-top: 2rem;
+}
+.indicator {
+	width: 24px; height: 4px;
+	background: rgba(56, 189, 248, 0.2);
+	border-radius: 2px; cursor: pointer;
+	transition: all 0.3s ease;
+}
+.indicator.active {
+	background: #38bdf8;
+	box-shadow: 0 0 10px #38bdf8;
+}
+
+@media (max-width: 768px) {
+	.carousel-button { width: 40px; height: 40px; }
+	.carousel-button.prev { left: 5px; }
+	.carousel-button.next { right: 5px; }
+	.carousel-card { min-width: 260px; max-width: 260px; margin: 0 15px; }
+	.carousel-card:not(.is-active) { transform: scale(0.85) rotateY(25deg); }
+	.carousel-card.is-prev { transform: scale(0.8) rotateY(30deg) translateX(-40px); }
+	.carousel-card.is-next { transform: scale(0.8) rotateY(-30deg) translateX(40px); }
+	.card-image-container { height: 160px; }
+}

@@ -81,3 +81,101 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => performTransition('next'));
     prevBtn.addEventListener('click', () => performTransition('prev'));
 });
+
+/* --- LÓGICA PARA EL CARRUSEL DE PASATIEMPOS --- */
+const hobbiesSection = document.querySelector("#pasatiempos");
+const track = hobbiesSection.querySelector(".carousel-track");
+
+// Solo ejecutar este código si la sección de pasatiempos existe
+if (track) {
+    const cards = Array.from(track.children);
+    const nextButton = hobbiesSection.querySelector(".carousel-button.next");
+    const prevButton = hobbiesSection.querySelector(".carousel-button.prev");
+    const container = hobbiesSection.querySelector(".carousel-container");
+    const indicators = hobbiesSection.querySelectorAll(".indicator");
+    let currentIndex = 0;
+    
+    // Función Debounce para optimizar el redimensionamiento
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
+
+    // Inicializar y actualizar el carrusel
+    function initializeCarousel() {
+        const cardWidth = cards[0].offsetWidth;
+        const cardMargin = parseInt(window.getComputedStyle(cards[0]).marginRight) * 2;
+        const initialOffset = container.offsetWidth / 2 - cardWidth / 2;
+        track.style.transform = `translateX(${initialOffset}px)`;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        cards.forEach((card, index) => {
+            card.classList.remove("is-active", "is-prev", "is-next");
+            if (index === currentIndex) card.classList.add("is-active");
+            else if (index === currentIndex - 1) card.classList.add("is-prev");
+            else if (index === currentIndex + 1) card.classList.add("is-next");
+        });
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === currentIndex);
+        });
+    }
+
+    // Mover a una carta específica
+    function moveToSlide(targetIndex) {
+        if (targetIndex < 0 || targetIndex >= cards.length) return;
+        const cardWidth = cards[0].offsetWidth;
+        const cardMargin = parseInt(window.getComputedStyle(cards[0]).marginRight) * 2;
+        const amountToMove = targetIndex * (cardWidth + cardMargin);
+        const containerCenter = container.offsetWidth / 2;
+        const cardCenter = cardWidth / 2;
+        const targetTranslateX = containerCenter - cardCenter - amountToMove;
+        track.style.transform = `translateX(${targetTranslateX - 25}px)`;
+        currentIndex = targetIndex;
+        updateCarousel();
+    }
+
+    // Event Listeners para botones e indicadores
+    nextButton.addEventListener("click", () => {
+        if (currentIndex + 1 < cards.length) moveToSlide(currentIndex + 1);
+    });
+    prevButton.addEventListener("click", () => {
+        if (currentIndex - 1 >= 0) moveToSlide(currentIndex - 1);
+    });
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => moveToSlide(index));
+    });
+
+    // Navegación con teclado
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+            if (currentIndex < cards.length - 1) moveToSlide(currentIndex + 1);
+        } else if (e.key === "ArrowLeft") {
+            if (currentIndex > 0) moveToSlide(currentIndex - 1);
+        }
+    });
+
+    // Redimensionamiento de ventana
+    window.addEventListener("resize", debounce(() => {
+        initializeCarousel();
+        moveToSlide(currentIndex);
+    }, 250));
+
+    // Inicialización final
+    // Esperamos un momento para asegurar que todo esté cargado
+    setTimeout(() => {
+        initializeCarousel();
+        moveToSlide(2); // Empieza en la carta del medio
+    }, 100);
+}

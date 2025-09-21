@@ -7,6 +7,7 @@
     <!-- FUENTES DE GOOGLE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <!-- ICONOS (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -30,9 +31,8 @@
     </header>
 
     <main>
-        <!-- SECCIÓN 1: INICIO -->
+        <!-- SECCIÓN 1: INICIO (Sin cambios) -->
         <section id="inicio" class="fullscreen-section">
-            
             <ul class='slider'>
                 <li class='item' data-person="sofia" style="background-image: url('assets/images/paginaInicio2.png')">
                     <div class='content'>
@@ -51,21 +51,170 @@
                     </div>
                 </li>
             </ul>
-
             <nav class='slider-nav'>
                 <button class='btn prev'>&lt;</button>
                 <button class='btn next'>&gt;</button>
             </nav>
-
             <div class="transition-overlay"></div>
-
         </section>
 
-        <section id="estudios" class="fullscreen-section" style="background: #f0f0f0;">
-            <h2 style="text-align:center; padding-top: 100px;">Sección de Estudios</h2>
+        <!-- ***** SECCIÓN 2: ESTUDIOS (NUEVO CÓDIGO) ***** -->
+        <section id="estudios" class="fullscreen-section">
+            <h2 class="section-title">Nuestra Formación Académica</h2>
+            <div class="studies-container">
+                
+                <!-- Tabla de Sofía -->
+                <div class="study-card sofia-card">
+                    <h3>Formación de Sofía</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nivel</th>
+                                <th>Institución</th>
+                                <th>Año</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Primaria</td>
+                                <td>[Nombre del Colegio]</td>
+                                <td>[Año Finalización]</td>
+                            </tr>
+                             <tr>
+                                <td>Bachillerato</td>
+                                <td>[Nombre del Colegio]</td>
+                                <td>[Año Finalización]</td>
+                            </tr>
+                            <tr>
+                                <td>Universidad</td>
+                                <td>[Nombre Universidad]</td>
+                                <td>En curso</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tabla de Diego -->
+                <div class="study-card diego-card">
+                    <h3>Formación de Diego</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nivel</th>
+                                <th>Institución</th>
+                                <th>Año</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Primaria</td>
+                                <td>[Nombre del Colegio]</td>
+                                <td>[Año Finalización]</td>
+                            </tr>
+                             <tr>
+                                <td>Bachillerato</td>
+                                <td>[Nombre del Colegio]</td>
+                                <td>[Año Finalización]</td>
+                            </tr>
+                            <tr>
+                                <td>Universidad</td>
+                                <td>[Nombre Universidad]</td>
+                                <td>En curso</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </section>
-        <section id="pasatiempos" class="fullscreen-section" style="background: #e9e9e9;">
-            <h2 style="text-align:center; padding-top: 100px;">Sección de Pasatiempos</h2>
+
+         <!-- ***** SECCIÓN 3: PASATIEMPOS (CÓDIGO NUEVO) ***** -->
+        <section id="pasatiempos" class="fullscreen-section">
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Carta 1: Pasatiempo de Diego (Azul) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=1" alt="Desarrollo de Videojuegos" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title text-cyan-400" data-text="Desarrollo de Videojuegos">Desarrollo de Videojuegos</h3>
+                            <p class="card-description">Me encanta crear mundos interactivos y dar vida a personajes. Disfruto el reto de programar mecánicas complejas y ver cómo otros se divierten con mis creaciones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Carta 2: Pasatiempo de Diego (Azul) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=2" alt="Ciclismo de Montaña" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title text-blue-400" data-text="Ciclismo de Montaña">Ciclismo de Montaña</h3>
+                            <p class="card-description">La adrenalina de descender por senderos y la conexión con la naturaleza son incomparables. Es mi forma de desconectar del código y mantenerme activo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Carta 3: Pasatiempo de Sofía (Morado) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=3" alt="Ilustración Digital" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title text-purple-400" data-text="Ilustración Digital">Ilustración Digital</h3>
+                            <p class="card-description">Plasmar ideas en un lienzo digital es mi pasión. Me permite experimentar con colores y estilos sin límites, creando personajes y escenarios únicos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Carta 4: Pasatiempo de Sofía (Morado) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=4" alt="Yoga y Meditación" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title text-pink-400" data-text="Yoga y Meditación">Yoga y Meditación</h3>
+                            <p class="card-description">Encuentro un equilibrio entre cuerpo y mente. El yoga me da fuerza y la meditación me aporta calma y claridad mental para el día a día.</p>
+                        </div>
+                    </div>
+
+                    <!-- Carta 5: Pasatiempo en Común (Mitad y Mitad) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=5" alt="Senderismo y Exploración" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title title-gradient" data-text="Senderismo y Exploración">Senderismo y Exploración</h3>
+                            <p class="card-description">Nos fascina descubrir nuevas rutas y paisajes juntos. Cada caminata es una aventura que fortalece nuestra conexión y nos regala vistas espectaculares.</p>
+                        </div>
+                    </div>
+
+                    <!-- Carta 6: Pasatiempo en Común (Mitad y Mitad) -->
+                    <div class="carousel-card">
+                        <div class="card-image-container">
+                            <img src="https://picsum.photos/320/200?t=6" alt="Cocina Internacional" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title title-gradient" data-text="Cocina Internacional">Cocina Internacional</h3>
+                            <p class="card-description">Experimentar con sabores del mundo es nuestro pasatiempo favorito en casa. Nos turnamos para elegir recetas y disfrutamos el proceso de crear platos deliciosos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-button prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+                </button>
+                <button class="carousel-button next">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                </button>
+
+                <div class="carousel-indicators">
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator active"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
         </section>
     </main>
     <script src="js/script.js"></script>
