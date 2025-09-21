@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.fullscreen-section');
 
-    // --- LÓGICA NAVBAR Y SCROLLSPY (Sin cambios) ---
+    // --- LÓGICA NAVBAR Y SCROLLSPY ---
     mainContainer.addEventListener('scroll', () => {
         if (mainContainer.scrollTop > 50) {
             header.classList.add('scrolled');
@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA DEL CARRUSEL CON DESVANECIMIENTO Y GRADIENTE ---
     const slider = document.querySelector('#inicio .slider');
     const nextBtn = document.querySelector('#inicio .next');
     const prevBtn = document.querySelector('#inicio .prev');
