@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Sofi y Diego</title>
+    <!-- FUENTES DE GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ICONOS (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+    <!-- HEADER (Sin cambios) -->
+    <header id="main-header">
+        <div class="logo">
+            <a href="#inicio">[Sofi y Diego]</a>
+        </div>
+        <nav class="main-nav">
+            <a href="#inicio" class="nav-link active">Inicio</a>
+            <a href="#estudios" class="nav-link">Estudios</a>
+            <a href="#pasatiempos" class="nav-link">Pasatiempos</a>
+            <a href="#proyectos" class="nav-link">Proyectos</a>
+            <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+        <button class="hamburger-menu" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INICIO (CARRUSEL ACTUALIZADO) -->
+        <section id="inicio" class="fullscreen-section">
+            
+            <ul class='slider'>
+                <!-- Slide para Sofi con clase específica para el gradiente -->
+                <li class='item' data-person="sofia" style="background-image: url('assets/images/paginaInicio2.png')">
+                    <div class='content'>
+                        <img src="assets/images/paginaInicio2.png" alt="Foto de Sofia" class="personal-photo">
+                        <h2 class='title sofia'>Sofía Arango Yanza</h2>
+                        <p class='birth-date'>Enero 11 del 2006</p>
+                        <p class='description'>Mis expectativas como profesional son crecer en un entorno innovador, donde pueda aplicar mis habilidades para resolver problemas complejos y colaborar en proyectos que tengan un impacto positivo. Busco aprender continuamente y adaptarme a las nuevas tecnologías.</p>
+                    </div>
+                </li>
+                <!-- Slide para Diego con clase específica para el gradiente -->
+                <li class='item' data-person="diego" style="background-image: url('assets/images/paginaInicio.png')">
+                    <div class='content'>
+                        <img src="assets/images/paginaInicio.png" alt="Foto de Diego" class="personal-photo">
+                        <h2 class='title diego'>Diego Gomez Garces</h2>
+                        <p class='birth-date'>Junio 25 2005</p>
+                        <p class='description'>Aspiro a convertirme en un referente en mi área, aportando soluciones creativas y eficientes. Mi objetivo es formar parte de un equipo dinámico que fomente el desarrollo profesional y me permita enfrentar desafíos que pongan a prueba mi ingenio y mi capacidad de liderazgo.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <nav class='slider-nav'>
+                <button class='btn prev'>&lt;</button>
+                <button class='btn next'>&gt;</button>
+            </nav>
+
+            <div class="transition-overlay"></div>
+
+        </section>
+
+        <!-- OTRAS SECCIONES (Sin cambios) -->
+        <section id="estudios" class="fullscreen-section" style="background: #f0f0f0;">
+            <h2 style="text-align:center; padding-top: 100px;">Sección de Estudios</h2>
+        </section>
+        <section id="pasatiempos" class="fullscreen-section" style="background: #e9e9e9;">
+            <h2 style="text-align:center; padding-top: 100px;">Sección de Pasatiempos</h2>
+        </section>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

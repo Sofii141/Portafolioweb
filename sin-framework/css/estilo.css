@@ -1,0 +1,157 @@
+/* --- ESTILOS GENERALES Y NAVBAR (Sin cambios) --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { font-family: 'Montserrat', sans-serif; height: 100%; scroll-behavior: smooth; overflow: hidden; }
+main { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
+.fullscreen-section { height: 100vh; width: 100%; position: relative; scroll-snap-align: start; }
+#main-header { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: background-color 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease; }
+#main-header.scrolled { background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); padding: 10px 5%; }
+.logo a { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #fff; text-decoration: none; font-weight: 700; }
+.main-nav { display: flex; gap: 20px; }
+.nav-link { color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 400; padding: 8px 15px; border-radius: 20px; position: relative; transition: color 0.3s ease, background-color 0.3s ease; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%; background-color: #fff; transition: all 0.3s ease-out; transform: translateX(-50%); }
+.nav-link:hover::after, .nav-link.active::after { width: 60%; }
+.nav-link:hover { color: #f0f0f0; }
+.hamburger-menu { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+
+/* --- ESTILOS CARRUSEL --- */
+#inicio { background: #333; overflow: hidden; }
+.slider { width: 100%; height: 100%; position: relative; list-style-type: none; }
+.item {
+    position: absolute;
+    z-index: 1;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.2s, left 0.75s, top 0.75s, width 0.75s, height 0.75s, opacity 0.5s ease;
+}
+.item:nth-child(1) { left: 0; top: 0; width: 100%; height: 100%; transform: none; border-radius: 0; }
+.item:nth-child(2) { left: calc(50% + 120px); top: 50%; width: 200px; height: 300px; transform: translateY(-50%); border-radius: 20px; }
+.item:nth-child(n+3) { opacity: 0; pointer-events: none; }
+.slider.hiding-preview .item:nth-child(2) { opacity: 0; }
+
+/* --- CONTENIDO DEL SLIDE (CON NUEVAS ANIMACIONES Y GRADIENTES) --- */
+.content {
+    width: min(50vw, 600px); /* Aumentamos un poco el ancho para el nombre completo */
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+    opacity: 0;
+    display: none;
+    text-align: left;
+    transition: opacity 0.5s ease-out;
+}
+.personal-photo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+
+/* --- TÍTULO CON FUENTE CURSIVA Y ANIMACIÓN DE ESCRITURA --- */
+.content .title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.5rem; /* Ligeramente más pequeño para que quepa bien */
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: none;
+    display: inline-block; /* Necesario para que la animación de ancho funcione bien */
+    white-space: nowrap; /* Evita que el nombre se rompa en dos líneas durante la animación */
+    overflow: hidden; /* Oculta las letras que aún no se han "escrito" */
+    border-right: 4px solid rgba(255, 255, 255, 0.75); /* Simula el cursor de escritura */
+}
+
+/* --- COLORES GRADIENTES PARA CADA NOMBRE --- */
+.title.sofia {
+    background-image: linear-gradient(45deg, #c3a1ff, #ff81f2); /* Gradiente morado */
+}
+.title.diego {
+    background-image: linear-gradient(45deg, #5fbfff, #007bff); /* Gradiente azul */
+}
+/* Técnica para aplicar el gradiente al texto */
+.title.sofia, .title.diego {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.content .birth-date {
+    font-size: 1.1rem;
+    margin-top: 1.5rem; /* Aumentamos la separación con el nombre */
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    opacity: 0; /* Lo animaremos después del nombre */
+}
+.content .description {
+    line-height: 1.7;
+    font-size: 1.1rem;
+    opacity: 0; /* Lo animaremos después del nombre */
+}
+
+/* --- ANIMACIONES DE APARICIÓN --- */
+.item:nth-child(1) .content {
+    display: block;
+    opacity: 1; /* Hacemos visible el contenedor */
+}
+/* Animación de escritura para los nombres */
+.item:nth-child(1) .title.sofia {
+    animation: typing 2.5s steps(20), blink 0.7s step-end infinite alternate;
+}
+.item:nth-child(1) .title.diego {
+    animation: typing 2.5s steps(19), blink 0.7s step-end infinite alternate;
+}
+/* Animación para el resto del contenido (fecha y descripción) */
+.item:nth-child(1) .birth-date,
+.item:nth-child(1) .description {
+    animation: fadeInAfterTyping 1s ease-out 2.8s forwards;
+}
+
+.item.fade-out .content {
+    opacity: 0;
+}
+
+/* Keyframes para la animación de escritura (typing) */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+/* Keyframes para el cursor parpadeante (blink) */
+@keyframes blink {
+    50% {
+        border-right-color: transparent;
+    }
+}
+/* Keyframes para que el resto del contenido aparezca después */
+@keyframes fadeInAfterTyping {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slider-nav { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 5; user-select: none; display: flex; gap: 1rem; }
+.slider-nav .btn { background-color: rgba(255, 255, 255, 0.25); color: white; border: none; border-radius: 50%; cursor: pointer; width: 60px; height: 60px; font-size: 1.8rem; font-weight: 300; transition: background-color 0.3s ease; display: flex; justify-content: center; align-items: center; }
+.slider-nav .btn:hover { background-color: rgba(255, 255, 255, 0.4); }
+
+/* --- ESTILOS OVERLAY (Sin cambios) --- */
+.transition-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; opacity: 0; pointer-events: none; }
+.transition-overlay.blue { background: linear-gradient(180deg, #0033FF, #0600AB, #00033D); }
+.transition-overlay.purple { background: linear-gradient(180deg, #977DFF, #5428a2); }
+.transition-overlay.active { animation: fadeInOut 1s ease-in-out; }
+@keyframes fadeInOut { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+
+/* --- RESPONSIVE DESIGN (Ajustado) --- */
+@media (max-width: 768px) {
+    .main-nav { display: none; }
+    .hamburger-menu { display: block; }
+    #main-header { padding: 10px 4%; }
+    .content { left: 5%; width: 90%; }
+    .content .title { font-size: 3rem; }
+    .content .description { font-size: 1rem; }
+    .item:nth-child(2) { display: none; }
+}
