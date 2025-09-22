@@ -1,19 +1,5 @@
 /* --- ESTILOS SECCIÓN PASATIEMPOS --- */
 
-#pasatiempos {
-    background-image: url('../assets/images/espacio.jpg');
-    background-size: cover; /* AÑADIDO */
-    background-position: center; /* AÑADIDO */
-    background-attachment: fixed; /* AÑADIDO */
-    font-family: "Exo 2", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-
 @keyframes gridMove {
     0% {
         background-position: 0px 0px;
@@ -30,6 +16,33 @@
     }
 }
 
+/* --- ESTILOS SECCIÓN PASATIEMPOS (ACTUALIZADO) --- */
+#pasatiempos {
+    background-image: url('../assets/images/estudios.png'); /* Usamos el mismo fondo para consistencia */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 3; /* Aumentamos el z-index para que se ponga sobre Estudios */
+}
+
+/* Transición de desvanecimiento superior */
+#pasatiempos::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(180deg, #0a0118 20%, rgba(10, 1, 24, 0) 100%);
+    z-index: 1;
+}
+
+/* Contenedor preparado para la animación de entrada */
 .carousel-container {
     width: 90%;
     max-width: 1100px;
@@ -37,6 +50,16 @@
     perspective: 2000px;
     padding: 3rem 0;
     z-index: 10;
+    /* --- Propiedades para la animación --- */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease;
+}
+
+/* Clase que activará la animación */
+.carousel-container.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .carousel-track {

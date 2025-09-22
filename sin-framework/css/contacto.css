@@ -1,7 +1,8 @@
 /* --- ESTILOS SECCIÓN CONTACTO --- */
 
+/* --- ESTILOS SECCIÓN CONTACTO (ACTUALIZADO) --- */
 #contacto {
-    background-image: url('../assets/images/espacio.jpg');
+    background-image: url('../assets/images/estudios.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -9,32 +10,70 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 80px 5%;
+    padding: 100px 5%;
     color: #fff;
-    overflow-y: auto; /* Permite scroll si el contenido es muy alto */
+    position: relative;
+    z-index: 5; /* Z-index más alto */
+    overflow: hidden;
+}
+
+/* Transición de desvanecimiento superior */
+#contacto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(180deg, #0a0118 20%, rgba(10, 1, 24, 0) 100%);
+    z-index: 1;
+}
+
+#contacto .section-title {
+    font-family: var(--font-principal, 'Poppins', sans-serif);
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 2;
 }
 
 .contact-container {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* El formulario un poco más ancho que la lista */
+    grid-template-columns: 1.2fr 1fr;
     gap: 40px;
     width: 100%;
     max-width: 1300px;
     height: 85%;
     max-height: 800px;
+    z-index: 2;
 }
 
+/* Columnas preparadas para la animación */
 .form-column, .list-column {
     background: rgba(15, 23, 42, 0.65);
     border: 1px solid rgba(94, 234, 212, 0.2);
     border-radius: 15px;
     padding: 30px;
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    /* --- Propiedades para la animación --- */
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease;
+}
+
+.form-column { transform: translateX(-100px); }
+.list-column { transform: translateX(100px); }
+
+/* Clase que activa la animación */
+.form-column.is-visible, .list-column.is-visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* --- ESTILOS DEL FORMULARIO --- */

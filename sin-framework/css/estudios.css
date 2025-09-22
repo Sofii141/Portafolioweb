@@ -1,116 +1,139 @@
-/* --- SECCIÓN ESTUDIOS --- */
+/* --- SECCIÓN ESTUDIOS (CÓDIGO FINAL CON TRANSICIÓN) --- */
 #estudios {
-    background-image: url('../assets/images/espacio.jpg');
+    background-image: url('../assets/images/estudios.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efecto parallax al hacer scroll */
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 60px 5%;
+    padding: 180px 5% 120px;
     color: #fff;
-    position: relative;
+    position: relative; /* Importante para el z-index */
+    overflow: hidden;
+    /* 1. MEJORA CLAVE: Z-INDEX SUPERIOR */
+    z-index: 2; /* Se posicionará por encima de la sección #inicio */
 }
 
+/* 2. MEJORA CLAVE: TRANSICIÓN DE DESVANECIMIENTO */
+#estudios::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh; /* Aumentamos la altura para un desvanecimiento más suave y largo */
+    background: linear-gradient(180deg, 
+        #0a0118 20%,       /* Empieza con un color sólido para cubrir bien */
+        rgba(10, 1, 24, 0) 100% /* Termina en transparente */
+    );
+    z-index: 1;
+}
 
-/* Contenedor principal de las tablas (sin cambios) */
+/* Animación de nebulosa (sin cambios) */
+.nebula-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(151, 125, 255, 0.15), rgba(0, 51, 255, 0.1) 70%, transparent 100%);
+    animation: rotate-nebula 30s linear infinite;
+    z-index: 0;
+}
+@keyframes rotate-nebula {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Título de la sección con la nueva fuente */
+#estudios .section-title {
+    font-family: var(--font-principal, 'Poppins', sans-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 2; /* Por encima del gradiente de desvanecimiento */
+}
+
+/* Contenedor y tarjetas (sin cambios en su mayoría) */
 .studies-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 40px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Por encima del gradiente de desvanecimiento */
 }
 
-/* Estilo base para cada "tarjeta" de estudio con borde de gradiente */
 .study-card {
-    width: 45%;
-    padding: 25px;
+    width: 48%;
+    padding: 30px 35px;
     border-radius: 15px;
-    background: rgba(22, 22, 33, 0.6); /* Un fondo oscuro ligeramente azulado */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    border: 2px solid transparent; /* El borde se manejará con border-image */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid transparent;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    opacity: 0;
+    transform: translateY(50px);
 }
+
+.study-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sofia-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(225, 198, 255, 0.7);
+    box-shadow: 0 0 30px rgba(195, 161, 255, 0.4);
+}
+.diego-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(137, 209, 255, 0.7);
+    box-shadow: 0 0 30px rgba(80, 150, 255, 0.4);
+}
+
+
+/* --- RESTO DEL CÓDIGO (SIN CAMBIOS) --- */
 
 .study-card h3 {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent;
 }
+.study-card table { width: 100%; border-collapse: collapse; }
+.study-card th, .study-card td { padding: 16px 10px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.study-card thead th { font-weight: 700; font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+.study-card tbody tr:last-child td { border-bottom: none; }
+.study-card tbody tr { transition: background-color 0.3s ease; }
+.study-card tbody tr:hover { background-color: rgba(255, 255, 255, 0.05); }
+.level-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; font-size: 0.9rem; }
+.icon-level { font-size: 1.5rem; opacity: 0.8; }
+.study-card td strong { font-size: 1.1rem; font-weight: 600; color: #ffffff; display: block; }
+.study-card td small { font-size: 0.9rem; color: #cccccc; font-weight: 400; }
 
-.study-card table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1rem;
-}
+.sofia-card { background: rgba(84, 40, 162, 0.25); transition-delay: 0.2s; }
+.sofia-card h3 { background-image: linear-gradient(135deg, #f2e6ee, #c3a1ff); }
+.sofia-card thead { background: linear-gradient(to right, rgba(195, 161, 255, 0.2), rgba(151, 125, 255, 0.2)); }
 
-.study-card th, .study-card td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
+.diego-card { background: rgba(0, 51, 255, 0.2); }
+.diego-card h3 { background-image: linear-gradient(135deg, #89d1ff, #0055ff); }
+.diego-card thead { background: linear-gradient(to right, rgba(0, 51, 255, 0.2), rgba(6, 0, 171, 0.2)); }
 
-.study-card thead th {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-/* Quitamos el borde de la última fila para un look más limpio */
-.study-card tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.study-card tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-
-/* --- COLORES Y GRADIENTES PERSONALIZADOS --- */
-
-/* Gradientes para Sofía */
-.sofia-card {
-    border-image: linear-gradient(135deg, #F2E6EE, #977DFF) 1;
-}
-.sofia-card h3 {
-    background-image: linear-gradient(135deg, #F2E6EE, #c3a1ff);
-}
-.sofia-card thead {
-    background-image: linear-gradient(to right, #c3a1ff, #977DFF);
-}
-
-/* Gradientes para Diego */
-.diego-card {
-    border-image: linear-gradient(135deg, #977DFF, #0033FF) 1;
-}
-.diego-card h3 {
-    background-image: linear-gradient(135deg, #89d1ff, #0033FF);
-}
-.diego-card thead {
-    background-image: linear-gradient(to right, #0033FF, #0600AB);
-}
-
-/* --- RESPONSIVE DESIGN PARA LA SECCIÓN ESTUDIOS --- */
 @media (max-width: 900px) {
-    .studies-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-    .study-card {
-        width: 90%;
-        max-width: 500px;
-    }
+    #estudios .section-title { font-size: 2rem; letter-spacing: 3px; }
+    .studies-container { flex-direction: column; align-items: center; gap: 30px; }
+    .study-card { width: 90%; max-width: 500px; }
+    .sofia-card { transition-delay: 0s; }
 }

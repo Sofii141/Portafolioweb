@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- FUENTES DE GOOGLE (ACTUALIZADO) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
         rel="stylesheet">
@@ -74,79 +76,121 @@
             <div class="transition-overlay"></div>
         </section>
 
-        <!-- ***** SECCIÓN 2: ESTUDIOS (NUEVO CÓDIGO) ***** -->
-        <section id="estudios" class="fullscreen-section">
-            <h2 class="section-title">Nuestra Formación Académica</h2>
-            <div class="studies-container">
+<!-- ***** SECCIÓN 2: ESTUDIOS (CÓDIGO ACTUALIZADO Y MEJORADO) ***** -->
+<section id="estudios" class="fullscreen-section">
+    <!-- Divs para la animación de nebulosa en el fondo -->
+    <div class="nebula-bg"></div>
 
-                <!-- Tabla de Sofía -->
-                <div class="study-card sofia-card">
-                    <h3>Formación de Sofía</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nivel</th>
-                                <th>Institución</th>
-                                <th>Año</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Primaria</td>
-                                <td>[Nombre del Colegio]</td>
-                                <td>[Año Finalización]</td>
-                            </tr>
-                            <tr>
-                                <td>Bachillerato</td>
-                                <td>[Nombre del Colegio]</td>
-                                <td>[Año Finalización]</td>
-                            </tr>
-                            <tr>
-                                <td>Universidad</td>
-                                <td>[Nombre Universidad]</td>
-                                <td>En curso</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <h2 class="section-title">Nuestra Formación Académica</h2>
+    <div class="studies-container">
 
-                <!-- Tabla de Diego -->
-                <div class="study-card diego-card">
-                    <h3>Formación de Diego</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nivel</th>
-                                <th>Institución</th>
-                                <th>Año</th>
-                                <th>Ubicación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Primaria</td>
-                                <td>La Concentración</td>
-                                <td>2010-2014</td>
-                                <td>El Bordo, Patía</td>
-                            </tr>
-                            <tr>
-                                <td>Bachillerato</td>
-                                <td>Bto Patía (Norte y Centro)</td>
-                                <td>2014-2021</td>
-                                <td>El Bordo, Patía</td>
-                            </tr>
-                            <tr>
-                                <td>Universidad</td>
-                                <td>Universidad del Cauca</td>
-                                <td>2021-Actualidad</td>
-                                <td>Popayán, Cauca</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Tabla de Sofía -->
+        <div class="study-card sofia-card">
+            <h3>Formación de Sofía</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Institución</th>
+                        <th>Año</th>
+                        <th>Ubicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-shapes icon-level"></i>
+                            <span>Primaria</span>
+                        </td>
+                        <td>
+                            <strong>Liceo Pedagógico</strong>
+                            <small>"El Saber"</small>
+                        </td>
+                        <td>2012-2017</td>
+                        <td>Medellín, Antioquia</td>
+                    </tr>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-book-open icon-level"></i>
+                            <span>Bachillerato</span>
+                        </td>
+                        <td>
+                            <strong>Colegio San Ignacio</strong>
+                            <small>de Loyola</small>
+                        </td>
+                        <td>2018-2023</td>
+                        <td>Medellín, Antioquia</td>
+                    </tr>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-graduation-cap icon-level"></i>
+                            <span>Universidad</span>
+                        </td>
+                        <td>
+                            <strong>Universidad EAFIT</strong>
+                            <small>Ingeniería de Sistemas</small>
+                        </td>
+                        <td>2024-Actualidad</td>
+                        <td>Medellín, Antioquia</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            </div>
-        </section>
+        <!-- Tabla de Diego -->
+        <div class="study-card diego-card">
+            <h3>Formación de Diego</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Institución</th>
+                        <th>Año</th>
+                        <th>Ubicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-shapes icon-level"></i>
+                            <span>Primaria</span>
+                        </td>
+                        <td>
+                            <strong>La Concentración</strong>
+                            <small>Sede Principal</small>
+                        </td>
+                        <td>2010-2014</td>
+                        <td>El Bordo, Patía</td>
+                    </tr>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-book-open icon-level"></i>
+                            <span>Bachillerato</span>
+                        </td>
+                        <td>
+                            <strong>Bto Patía</strong>
+                            <small>Norte y Centro</small>
+                        </td>
+                        <td>2014-2021</td>
+                        <td>El Bordo, Patía</td>
+                    </tr>
+                    <tr>
+                        <td class="level-cell">
+                            <i class="fa-solid fa-graduation-cap icon-level"></i>
+                            <span>Universidad</span>
+                        </td>
+                        <td>
+                            <strong>Universidad del Cauca</strong>
+                            <small>Ingeniería de Sistemas</small>
+                        </td>
+                        <td>2021-Actualidad</td>
+                        <td>Popayán, Cauca</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
         <!-- ***** SECCIÓN 3: PASATIEMPOS (CÓDIGO NUEVO) ***** -->
         <section id="pasatiempos" class="fullscreen-section">

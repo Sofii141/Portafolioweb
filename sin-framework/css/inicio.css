@@ -1,5 +1,14 @@
 /* --- ESTILOS CARRUSEL --- */
-#inicio { background: #333; overflow: hidden; }
+
+#inicio { 
+    background: #333; 
+    overflow: hidden;
+    /* --- ELIMINA ESTAS TRES LÍNEAS --- */
+    position: sticky;
+    top: 0;
+    z-index: 1; 
+}
+
 .slider { width: 100%; height: 100%; position: relative; list-style-type: none; }
 .item {
     position: absolute;
@@ -15,7 +24,7 @@
 
 /* --- CONTENIDO DEL SLIDE --- */
 .content {
-    width: min(50vw, 600px); 
+    width: min(50vw, 600px);
     position: absolute;
     top: 50%;
     left: 10%;
@@ -27,62 +36,73 @@
     text-align: left;
     transition: opacity 0.5s ease-out;
 }
-.personal-photo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+
+/* MODIFICACIÓN: La foto de perfil debe ser visible desde el inicio, sin animación */
+.personal-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    opacity: 0; /* Por defecto estará oculta */
+}
 
 /* --- TÍTULO CON FUENTE CURSIVA Y ANIMACIÓN DE ESCRITURA --- */
 .content .title {
-    font-family: 'Pacifico';
-    font-size: 4.5rem; 
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: none;
-    display: inline-block; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    border-right: 4px solid rgba(255, 255, 255, 0.75); /* Simula el cursor de escritura */
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid rgba(255, 255, 255, 0.75);
+    color: white;
 }
 
-/* --- COLORES GRADIENTES PARA CADA NOMBRE --- */
-.title.sofia {
-    background-image: linear-gradient(45deg, #c3a1ff, #ff81f2); /* Gradiente morado */
-}
-.title.diego {
-    background-image: linear-gradient(45deg, #5fbfff, #007bff); /* Gradiente azul */
-}
-/* Técnica para aplicar el gradiente al texto */
 .title.sofia, .title.diego {
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    background-image: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
 }
 
 .content .birth-date {
     font-size: 1.1rem;
-    margin-top: 1.5rem; /* Aumentamos la separación con el nombre */
+    margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     font-style: italic;
-    opacity: 0; /* Lo animaremos después del nombre */
+    opacity: 0;
 }
+
 .content .description {
     line-height: 1.7;
     font-size: 1.1rem;
-    opacity: 0; /* Lo animaremos después del nombre */
+    opacity: 0;
 }
 
 /* --- ANIMACIONES DE APARICIÓN --- */
 .item:nth-child(1) .content {
     display: block;
-    opacity: 1; /* Hacemos visible el contenedor */
+    opacity: 1;
 }
-/* Animación de escritura para los nombres */
+
+/* AÑADIDO: Hacemos que la foto aparezca inmediatamente y se quede fija */
+.item:nth-child(1) .personal-photo {
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* Una transición suave para que no aparezca de golpe */
+}
+
 .item:nth-child(1) .title.sofia {
     animation: typing 2.5s steps(20), blink 0.7s step-end infinite alternate;
 }
+
 .item:nth-child(1) .title.diego {
     animation: typing 2.5s steps(19), blink 0.7s step-end infinite alternate;
 }
-/* Animación para el resto del contenido (fecha y descripción) */
+
+/* MODIFICACIÓN: La animación ahora solo se aplica a la fecha y descripción */
 .item:nth-child(1) .birth-date,
 .item:nth-child(1) .description {
     animation: fadeInAfterTyping 1s ease-out 2.8s forwards;
@@ -101,12 +121,14 @@
         width: 100%;
     }
 }
+
 /* Keyframes para el cursor parpadeante (blink) */
 @keyframes blink {
     50% {
         border-right-color: transparent;
     }
 }
+
 /* Keyframes para que el resto del contenido aparezca después */
 @keyframes fadeInAfterTyping {
     from {

@@ -34,6 +34,16 @@ main { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
 	--neon-blue: rgba(59, 130, 246, 0.8);
 	--neon-green: rgba(16, 185, 129, 0.8);
 }
+:root {
+    --font-principal: 'Poppins', sans-serif;
+    --font-cursiva: 'Great Vibes', cursive;
+}
+
+
+body {
+    font-family: var(--font-principal);
+    /* ... otros estilos de body que ya tengas ... */
+}
 
 /* --- RESPONSIVE DESIGN GLOBAL --- */
 @media (max-width: 768px) {

@@ -1,6 +1,7 @@
 /* --- ESTILOS SECCIÓN PROYECTOS --- */
+/* --- ESTILOS SECCIÓN PROYECTOS (ACTUALIZADO) --- */
 #proyectos {
-    background-image: url('../assets/images/espacio.jpg'); /* Reutilizamos el fondo de estudios */
+    background-image: url('../assets/images/estudios.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -8,17 +9,37 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 80px 5%;
+    padding: 100px 5%;
     color: #fff;
     position: relative;
+    z-index: 4; /* Aumentamos z-index */
+}
+
+/* Transición de desvanecimiento superior */
+#proyectos::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(180deg, #0a0118 20%, rgba(10, 1, 24, 0) 100%);
     z-index: 1;
 }
 
-/* El título de la sección ya tiene un estilo global, así que no necesita cambios */
+#proyectos .section-title {
+    font-family: var(--font-principal, 'Poppins', sans-serif);
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 2;
+}
 
 .projects-grid {
     display: grid;
-    /* Creamos una cuadrícula responsive */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     width: 100%;
@@ -26,23 +47,36 @@
     z-index: 2;
 }
 
+/* Tarjetas preparadas para la animación */
 .project-card {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(94, 234, 212, 0.2);
     border-radius: 15px;
     padding: 30px;
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    /* --- Propiedades para la animación --- */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 0.6s ease, box-shadow 0.3s ease, opacity 0.6s ease;
 }
 
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(94, 234, 212, 0.3);
 }
+
+/* Clase que activa la animación */
+.project-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto escalonado (staggered) */
+.project-card:nth-child(2) { transition-delay: 0.1s; }
+.project-card:nth-child(3) { transition-delay: 0.2s; }
 
 .project-header {
     display: flex;
