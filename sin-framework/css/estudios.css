@@ -1,0 +1,116 @@
+/* --- SECCIÓN ESTUDIOS --- */
+#estudios {
+    background-image: url('../assets/images/espacio.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto parallax al hacer scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 5%;
+    color: #fff;
+    position: relative;
+}
+
+
+/* Contenedor principal de las tablas (sin cambios) */
+.studies-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilo base para cada "tarjeta" de estudio con borde de gradiente */
+.study-card {
+    width: 45%;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(22, 22, 33, 0.6); /* Un fondo oscuro ligeramente azulado */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 2px solid transparent; /* El borde se manejará con border-image */
+}
+
+.study-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.study-card table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.study-card th, .study-card td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.study-card thead th {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Quitamos el borde de la última fila para un look más limpio */
+.study-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.study-card tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* --- COLORES Y GRADIENTES PERSONALIZADOS --- */
+
+/* Gradientes para Sofía */
+.sofia-card {
+    border-image: linear-gradient(135deg, #F2E6EE, #977DFF) 1;
+}
+.sofia-card h3 {
+    background-image: linear-gradient(135deg, #F2E6EE, #c3a1ff);
+}
+.sofia-card thead {
+    background-image: linear-gradient(to right, #c3a1ff, #977DFF);
+}
+
+/* Gradientes para Diego */
+.diego-card {
+    border-image: linear-gradient(135deg, #977DFF, #0033FF) 1;
+}
+.diego-card h3 {
+    background-image: linear-gradient(135deg, #89d1ff, #0033FF);
+}
+.diego-card thead {
+    background-image: linear-gradient(to right, #0033FF, #0600AB);
+}
+
+/* --- RESPONSIVE DESIGN PARA LA SECCIÓN ESTUDIOS --- */
+@media (max-width: 900px) {
+    .studies-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .study-card {
+        width: 90%;
+        max-width: 500px;
+    }
+}

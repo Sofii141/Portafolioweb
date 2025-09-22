@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,21 @@
     <!-- FUENTES DE GOOGLE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+        rel="stylesheet">
     <!-- ICONOS (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/estilo.css">
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/estudios.css">
+    <link rel="stylesheet" href="css/pasatiempos.css">
+    <link rel="stylesheet" href="css/proyectos.css">
+    <link rel="stylesheet" href="css/contacto.css">
 </head>
+
 <body>
     <header id="main-header">
         <div class="logo">
@@ -39,15 +49,21 @@
                         <img src="assets/images/paginaInicio2.png" alt="Foto de Sofia" class="personal-photo">
                         <h2 class='title sofia'>Sofía Arango Yanza</h2>
                         <p class='birth-date'>Enero 11 del 2006</p>
-                        <p class='description'>Mis expectativas como profesional son crecer en un entorno innovador, donde pueda aplicar mis habilidades para resolver problemas complejos y colaborar en proyectos que tengan un impacto positivo. Busco aprender continuamente y adaptarme a las nuevas tecnologías.</p>
+                        <p class='description'>Mis expectativas como profesional son crecer en un entorno innovador,
+                            donde pueda aplicar mis habilidades para resolver problemas complejos y colaborar en
+                            proyectos que tengan un impacto positivo. Busco aprender continuamente y adaptarme a las
+                            nuevas tecnologías.</p>
                     </div>
                 </li>
                 <li class='item' data-person="diego" style="background-image: url('assets/images/paginaInicio.png')">
                     <div class='content'>
                         <img src="assets/images/paginaInicio.png" alt="Foto de Diego" class="personal-photo">
-                        <h2 class='title diego'>Diego Gomez Garces</h2>
-                        <p class='birth-date'>Junio 25 2005</p>
-                        <p class='description'>Aspiro a convertirme en un referente en mi área, aportando soluciones creativas y eficientes. Mi objetivo es formar parte de un equipo dinámico que fomente el desarrollo profesional y me permita enfrentar desafíos que pongan a prueba mi ingenio y mi capacidad de liderazgo.</p>
+                        <h2 class='title diego'>Juan Diego Gómez</h2>
+                        <p class='birth-date'>Julio 25 2004</p>
+                        <p class='description'>Aspiro a convertirme en un referente en mi área, aportando soluciones
+                            creativas y eficientes. Mi objetivo es formar parte de un equipo dinámico que fomente el
+                            desarrollo profesional y me permita enfrentar desafíos que pongan a prueba mi ingenio y mi
+                            capacidad de liderazgo.</p>
                     </div>
                 </li>
             </ul>
@@ -62,7 +78,7 @@
         <section id="estudios" class="fullscreen-section">
             <h2 class="section-title">Nuestra Formación Académica</h2>
             <div class="studies-container">
-                
+
                 <!-- Tabla de Sofía -->
                 <div class="study-card sofia-card">
                     <h3>Formación de Sofía</h3>
@@ -80,7 +96,7 @@
                                 <td>[Nombre del Colegio]</td>
                                 <td>[Año Finalización]</td>
                             </tr>
-                             <tr>
+                            <tr>
                                 <td>Bachillerato</td>
                                 <td>[Nombre del Colegio]</td>
                                 <td>[Año Finalización]</td>
@@ -103,23 +119,27 @@
                                 <th>Nivel</th>
                                 <th>Institución</th>
                                 <th>Año</th>
+                                <th>Ubicación</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Primaria</td>
-                                <td>[Nombre del Colegio]</td>
-                                <td>[Año Finalización]</td>
+                                <td>La Concentración</td>
+                                <td>2010-2014</td>
+                                <td>El Bordo, Patía</td>
                             </tr>
-                             <tr>
+                            <tr>
                                 <td>Bachillerato</td>
-                                <td>[Nombre del Colegio]</td>
-                                <td>[Año Finalización]</td>
+                                <td>Bto Patía (Norte y Centro)</td>
+                                <td>2014-2021</td>
+                                <td>El Bordo, Patía</td>
                             </tr>
                             <tr>
                                 <td>Universidad</td>
-                                <td>[Nombre Universidad]</td>
-                                <td>En curso</td>
+                                <td>Universidad del Cauca</td>
+                                <td>2021-Actualidad</td>
+                                <td>Popayán, Cauca</td>
                             </tr>
                         </tbody>
                     </table>
@@ -128,82 +148,106 @@
             </div>
         </section>
 
-         <!-- ***** SECCIÓN 3: PASATIEMPOS (CÓDIGO NUEVO) ***** -->
+        <!-- ***** SECCIÓN 3: PASATIEMPOS (CÓDIGO NUEVO) ***** -->
         <section id="pasatiempos" class="fullscreen-section">
             <div class="carousel-container">
                 <div class="carousel-track">
                     <!-- Carta 1: Pasatiempo de Diego (Azul) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card diego">
                         <div class="card-image-container">
-                            <img src="https://picsum.photos/320/200?t=1" alt="Desarrollo de Videojuegos" class="card-image">
+                            <img src="https://picsum.photos/320/200?t=1" alt="Desarrollo de Videojuegos"
+                                class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title text-cyan-400" data-text="Desarrollo de Videojuegos">Desarrollo de Videojuegos</h3>
-                            <p class="card-description">Me encanta crear mundos interactivos y dar vida a personajes. Disfruto el reto de programar mecánicas complejas y ver cómo otros se divierten con mis creaciones.</p>
+                            <h3 class="card-title text-cyan-400" data-text="Desarrollo de Videojuegos">Desarrollo de
+                                Videojuegos</h3>
+                            <p class="card-description">Me encanta crear mundos interactivos y dar vida a personajes.
+                                Disfruto el reto de programar mecánicas complejas y ver cómo otros se divierten con mis
+                                creaciones.</p>
                         </div>
                     </div>
 
                     <!-- Carta 2: Pasatiempo de Diego (Azul) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card diego">
                         <div class="card-image-container">
                             <img src="https://picsum.photos/320/200?t=2" alt="Ciclismo de Montaña" class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title text-blue-400" data-text="Ciclismo de Montaña">Ciclismo de Montaña</h3>
-                            <p class="card-description">La adrenalina de descender por senderos y la conexión con la naturaleza son incomparables. Es mi forma de desconectar del código y mantenerme activo.</p>
+                            <h3 class="card-title text-blue-400" data-text="Ciclismo de Montaña">Ciclismo de Montaña
+                            </h3>
+                            <p class="card-description">La adrenalina de descender por senderos y la conexión con la
+                                naturaleza son incomparables. Es mi forma de desconectar del código y mantenerme activo.
+                            </p>
                         </div>
                     </div>
 
                     <!-- Carta 3: Pasatiempo de Sofía (Morado) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card sofia">
                         <div class="card-image-container">
                             <img src="https://picsum.photos/320/200?t=3" alt="Ilustración Digital" class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title text-purple-400" data-text="Ilustración Digital">Ilustración Digital</h3>
-                            <p class="card-description">Plasmar ideas en un lienzo digital es mi pasión. Me permite experimentar con colores y estilos sin límites, creando personajes y escenarios únicos.</p>
+                            <h3 class="card-title text-purple-400" data-text="Ilustración Digital">Ilustración Digital
+                            </h3>
+                            <p class="card-description">Plasmar ideas en un lienzo digital es mi pasión. Me permite
+                                experimentar con colores y estilos sin límites, creando personajes y escenarios únicos.
+                            </p>
                         </div>
                     </div>
-                    
+
                     <!-- Carta 4: Pasatiempo de Sofía (Morado) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card sofia">
                         <div class="card-image-container">
                             <img src="https://picsum.photos/320/200?t=4" alt="Yoga y Meditación" class="card-image">
                         </div>
                         <div class="card-content">
                             <h3 class="card-title text-pink-400" data-text="Yoga y Meditación">Yoga y Meditación</h3>
-                            <p class="card-description">Encuentro un equilibrio entre cuerpo y mente. El yoga me da fuerza y la meditación me aporta calma y claridad mental para el día a día.</p>
+                            <p class="card-description">Encuentro un equilibrio entre cuerpo y mente. El yoga me da
+                                fuerza y la meditación me aporta calma y claridad mental para el día a día.</p>
                         </div>
                     </div>
 
                     <!-- Carta 5: Pasatiempo en Común (Mitad y Mitad) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card comun">
                         <div class="card-image-container">
-                            <img src="https://picsum.photos/320/200?t=5" alt="Senderismo y Exploración" class="card-image">
+                            <img src="https://picsum.photos/320/200?t=5" alt="Senderismo y Exploración"
+                                class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title title-gradient" data-text="Senderismo y Exploración">Senderismo y Exploración</h3>
-                            <p class="card-description">Nos fascina descubrir nuevas rutas y paisajes juntos. Cada caminata es una aventura que fortalece nuestra conexión y nos regala vistas espectaculares.</p>
+                            <h3 class="card-title title-gradient" data-text="Senderismo y Exploración">Senderismo y
+                                Exploración</h3>
+                            <p class="card-description">Nos fascina descubrir nuevas rutas y paisajes juntos. Cada
+                                caminata es una aventura que fortalece nuestra conexión y nos regala vistas
+                                espectaculares.</p>
                         </div>
                     </div>
 
                     <!-- Carta 6: Pasatiempo en Común (Mitad y Mitad) -->
-                    <div class="carousel-card">
+                    <div class="carousel-card comun">
                         <div class="card-image-container">
                             <img src="https://picsum.photos/320/200?t=6" alt="Cocina Internacional" class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title title-gradient" data-text="Cocina Internacional">Cocina Internacional</h3>
-                            <p class="card-description">Experimentar con sabores del mundo es nuestro pasatiempo favorito en casa. Nos turnamos para elegir recetas y disfrutamos el proceso de crear platos deliciosos.</p>
+                            <h3 class="card-title title-gradient" data-text="Cocina Internacional">Cocina Internacional
+                            </h3>
+                            <p class="card-description">Experimentar con sabores del mundo es nuestro pasatiempo
+                                favorito en casa. Nos turnamos para elegir recetas y disfrutamos el proceso de crear
+                                platos deliciosos.</p>
                         </div>
                     </div>
                 </div>
 
                 <button class="carousel-button prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
                 </button>
                 <button class="carousel-button next">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
                 </button>
 
                 <div class="carousel-indicators">
@@ -216,7 +260,179 @@
                 </div>
             </div>
         </section>
+        <!-- ***** SECCIÓN 4: PROYECTOS ***** -->
+        <section id="proyectos" class="fullscreen-section">
+            <h2 class="section-title">Nuestros Proyectos</h2>
+            <div class="projects-grid">
+
+                <!-- Proyecto 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-gamepad project-icon"></i>
+                        <h3 class="project-title">Motor de Videojuegos 2D</h3>
+                    </div>
+                    <p class="project-description">
+                        Un motor gráfico simple construido desde cero en C++ para renderizar sprites y gestionar la
+                        lógica de juegos de plataforma 2D.
+                    </p>
+                    <ul class="project-tech-list">
+                        <li>C++</li>
+                        <li>OpenGL</li>
+                        <li>SDL2</li>
+                    </ul>
+                    <a href="#" class="project-link" target="_blank">Ver en GitHub <i
+                            class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-palette project-icon"></i>
+                        <h3 class="project-title">Portafolio Personal (Este sitio)</h3>
+                    </div>
+                    <p class="project-description">
+                        Página web responsive diseñada para mostrar nuestras habilidades y pasatiempos, creada con
+                        tecnologías web nativas.
+                    </p>
+                    <ul class="project-tech-list">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                    </ul>
+                    <a href="#inicio" class="project-link">Explorar página <i class="fa-solid fa-circle-nodes"></i></a>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-server project-icon"></i>
+                        <h3 class="project-title">API REST para Blog</h3>
+                    </div>
+                    <p class="project-description">
+                        Backend para una plataforma de blogs que permite operaciones CRUD (Crear, Leer, Actualizar,
+                        Borrar) para usuarios y publicaciones.
+                    </p>
+                    <ul class="project-tech-list">
+                        <li>Node.js</li>
+                        <li>Express</li>
+                        <li>MongoDB</li>
+                    </ul>
+                    <a href="#" class="project-link" target="_blank">Ver Documentación <i
+                            class="fa-solid fa-file-lines"></i></a>
+                </div>
+
+
+
+            </div>
+        </section>
+        <!-- ***** SECCIÓN 5: CONTACTO ***** -->
+        <section id="contacto" class="fullscreen-section">
+            <h2 class="section-title">Hablemos</h2>
+            <div class="contact-container">
+
+                <!-- Columna del Formulario -->
+                <div class="form-column">
+                    <form id="contact-form" novalidate>
+                        <!-- Campo oculto para manejar la edición -->
+                        <input type="hidden" id="contact-id" name="id">
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Sofía Arango">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico:</label>
+                            <input type="email" id="email" name="email" required
+                                placeholder="Ej: sofia.arango@email.com">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3001234567">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motivo">Motivo del Contacto:</label>
+                            <select id="motivo" name="motivo" required>
+                                <option value="">-- Por favor, elige una opción --</option>
+                                <option value="propuesta-laboral">Propuesta Laboral</option>
+                                <option value="colaboracion">Colaboración en Proyecto</option>
+                                <option value="feedback">Feedback sobre el Portafolio</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required
+                                placeholder="Escribe tu mensaje aquí..."></textarea>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <fieldset class="form-group">
+                            <legend>Preferencia de Contacto:</legend>
+                            <div class="radio-group">
+                                <label><input type="radio" name="preferenciaContacto" value="email" checked>
+                                    Email</label>
+                                <label><input type="radio" name="preferenciaContacto" value="telefono"> Teléfono</label>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="aceptaTerminos" name="aceptaTerminos" required>
+                            <label for="aceptaTerminos">Acepto los términos y condiciones.</label>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" id="guardar-btn">Guardar Contacto</button>
+                            <button type="reset" id="limpiar-btn">Limpiar Formulario</button>
+                        </div>
+
+                        <div id="form-messages"></div>
+                    </form>
+                </div>
+
+                <!-- Columna de la Lista de Contactos -->
+                <div class="list-column">
+                    <h3>Contactos Guardados</h3>
+                    <div class="list-actions">
+                        <button id="borrar-todo-btn">Borrar Todo</button>
+                    </div>
+                    <ul id="contact-list">
+                        <!-- Los contactos se insertarán aquí dinámicamente -->
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
+    <!-- Plantilla para los items de la lista de contactos -->
+    <template id="contact-item-template">
+        <li class="contact-item" data-id="">
+            <div class="contact-info">
+                <strong class="contact-name"></strong>
+                <span class="contact-email"></span>
+                <span class="contact-phone"></span>
+                <small class="contact-date"></small>
+            </div>
+            <div class="contact-actions">
+                <button class="edit-btn">Editar</button>
+                <button class="delete-btn">Eliminar</button>
+            </div>
+        </li>
+    </template>
+
+    <!-- SCRIPTS -->
+    <!-- Lógica principal (navbar, sliders, etc.) -->
     <script src="js/script.js"></script>
-</body>
+
+    <!-- Lógica de la sección de contacto -->
+    <!-- El type="module" nos permite usar import/export entre archivos JS -->
+    <script type="module" src="js/contacto.js"></script>
+
 </html>

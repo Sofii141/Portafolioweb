@@ -1,0 +1,125 @@
+/* --- ESTILOS SECCIÓN PROYECTOS --- */
+#proyectos {
+    background-image: url('../assets/images/espacio.jpg'); /* Reutilizamos el fondo de estudios */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 5%;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+/* El título de la sección ya tiene un estilo global, así que no necesita cambios */
+
+.projects-grid {
+    display: grid;
+    /* Creamos una cuadrícula responsive */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    z-index: 2;
+}
+
+.project-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(94, 234, 212, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(94, 234, 212, 0.3);
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.project-icon {
+    font-size: 2rem;
+    color: #22d3ee; /* Color cian neón */
+}
+
+.project-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.project-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(241, 245, 249, 0.85);
+    flex-grow: 1; /* Hace que la descripción ocupe el espacio disponible */
+    margin-bottom: 25px;
+}
+
+.project-tech-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-left: 0;
+}
+
+.project-tech-list li {
+    background-color: rgba(14, 165, 233, 0.15);
+    color: #93c5fd; /* Azul claro */
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.project-link {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: 700;
+    align-self: flex-start; /* Se alinea a la izquierda */
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.project-link:hover {
+    color: #60a5fa; /* Azul claro para el hover */
+}
+
+.project-link i {
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover i {
+    transform: translateX(3px) translateY(-3px);
+}
+
+
+/* --- RESPONSIVE DESIGN PARA PROYECTOS --- */
+@media (max-width: 768px) {
+    #proyectos {
+        padding: 60px 4%;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+        gap: 25px;
+    }
+}
