@@ -1,24 +1,17 @@
 /* --- ESTILOS SECCIÓN PASATIEMPOS --- */
 
-@keyframes gridMove {
-    0% {
-        background-position: 0px 0px;
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 0.2;
-    }
-
-    100% {
-        background-position: 40px 40px;
-        opacity: 0.5;
-    }
+/* --- Variables de Color para Personalización --- */
+:root {
+    --color-diego: #38bdf8;       /* Azul Cian Vibrante */
+    --color-sofia: #a855f7;       /* Morado Eléctrico */
+    --glow-diego: rgba(56, 189, 248, 0.7);
+    --glow-sofia: rgba(168, 85, 247, 0.7);
 }
 
-/* --- ESTILOS SECCIÓN PASATIEMPOS (ACTUALIZADO) --- */
+/* (El resto del código general de la sección se mantiene igual...) */
+
 #pasatiempos {
-    background-image: url('../assets/images/estudios.png'); /* Usamos el mismo fondo para consistencia */
+    background-image: url('../assets/images/estudios.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -27,10 +20,9 @@
     align-items: center;
     overflow: hidden;
     position: relative;
-    z-index: 3; /* Aumentamos el z-index para que se ponga sobre Estudios */
+    z-index: 3;
 }
 
-/* Transición de desvanecimiento superior */
 #pasatiempos::before {
     content: '';
     position: absolute;
@@ -42,7 +34,6 @@
     z-index: 1;
 }
 
-/* Contenedor preparado para la animación de entrada */
 .carousel-container {
     width: 90%;
     max-width: 1100px;
@@ -50,13 +41,11 @@
     perspective: 2000px;
     padding: 3rem 0;
     z-index: 10;
-    /* --- Propiedades para la animación --- */
     opacity: 0;
     transform: translateY(50px);
     transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease;
 }
 
-/* Clase que activará la animación */
 .carousel-container.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -69,297 +58,173 @@
 }
 
 .carousel-card {
-    min-width: 320px;
-    max-width: 320px;
+    min-width: 340px;
+    max-width: 340px;
     margin: 0 25px;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
-    border-radius: 1.2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
-    transition: all 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
+    /* CAMBIO: Se ajusta la transición base para que no interfiera con el nuevo hover */
+    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
     transform-origin: center center;
     position: relative;
-    border: 1px solid rgba(94, 234, 212, 0.2);
 }
 
-/* Efecto de borde holográfico */
-.carousel-card::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, transparent 0%, var(--neon-blue) 25%, var(--neon-green) 50%, var(--neon-pink) 75%, transparent 100%);
-    z-index: -1;
-    border-radius: 1.3rem;
-    filter: blur(8px);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: borderGlow 6s linear infinite;
+/* (El resto del código de las tarjetas se mantiene igual...) */
+
+.carousel-card.is-active {
+    filter: saturate(1.1) brightness(1.1);
 }
-
-@keyframes borderGlow {
-    0% {
-        background-position: 0% 50%;
-        opacity: 0.3;
-    }
-
-    50% {
-        background-position: 100% 50%;
-        opacity: 0.5;
-    }
-
-    100% {
-        background-position: 0% 50%;
-        opacity: 0.3;
-    }
+.carousel-card.diego.is-active {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-diego);
 }
-
-.carousel-card.is-active::before {
-    opacity: 1;
-    background-size: 300% 300%;
+.carousel-card.sofia.is-active {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-sofia);
 }
-
+.carousel-card.comun.is-active {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-diego), 0 0 65px var(--glow-sofia);
+}
 .carousel-card:not(.is-active) {
     transform: scale(0.8) rotateY(35deg) translateZ(-100px);
     opacity: 0.45;
     filter: saturate(0.6) brightness(0.7);
 }
-
 .carousel-card.is-prev {
     transform-origin: right center;
     transform: scale(0.75) rotateY(45deg) translateX(-80px) translateZ(-150px);
 }
-
 .carousel-card.is-next {
     transform-origin: left center;
     transform: scale(0.75) rotateY(-45deg) translateX(80px) translateZ(-150px);
 }
-
 .carousel-card.is-active {
     transform: scale(1) rotateY(0) translateZ(0);
     opacity: 1;
     z-index: 20;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-primary), inset 0 0 20px rgba(56, 189, 248, 0.1);
-    filter: saturate(1.2) brightness(1.1);
 }
 
+/* ===== INICIO DE LA NUEVA SECCIÓN DE ANIMACIÓN INTERACTIVA ===== */
+
+/* 
+  Añadimos una transición específica para la tarjeta activa.
+  Esto hace que la animación al pasar el cursor sea rápida y suave (0.4s),
+  sin afectar la animación más lenta del carrusel al cambiar de tarjeta.
+*/
+.carousel-card.is-active {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease-out,
+                filter 0.4s ease-out;
+}
+
+/* 
+  Este es el efecto que se activa al pasar el cursor (hover) 
+  sobre la tarjeta que está en el centro.
+*/
+.carousel-card.is-active:hover {
+    /* 1. La levantamos 15px y la hacemos un 5% más grande */
+    transform: translateY(-15px) scale(1.05);
+}
+
+/* 2. Hacemos que la sombra y el brillo se expandan para un efecto dramático */
+.carousel-card.diego.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-diego);
+}
+.carousel-card.sofia.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-sofia);
+}
+.carousel-card.comun.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 70px var(--glow-diego), 0 0 90px var(--glow-sofia);
+}
+
+/* ===== FIN DE LA NUEVA SECCIÓN DE ANIMACIÓN INTERACTIVA ===== */
+
+
+/* (El resto del código del contenido y controles se mantiene igual...) */
 .card-image-container {
     position: relative;
-    height: 200px;
+    height: 210px;
     overflow: hidden;
-    border-bottom: 1px solid rgba(94, 234, 212, 0.3);
+    border-bottom: none; 
 }
-
 .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 1.5s ease;
+    transition: transform 1.5s ease, filter 0.5s ease;
 }
-
 .carousel-card.is-active .card-image {
     transform: scale(1.05);
 }
-
-.card-image-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(120deg, rgba(56, 189, 248, 0.1), transparent 70%), radial-gradient(circle at 80% 20%, rgba(94, 234, 212, 0.15), transparent 50%);
-    pointer-events: none;
-}
-
-.card-image-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(0deg, rgba(6, 182, 212, 0.05) 0px, rgba(6, 182, 212, 0.05) 1px, transparent 1px, transparent 4px);
-    pointer-events: none;
-    opacity: 0.5;
-    z-index: 5;
-}
-
 .card-content {
     padding: 1.75rem;
     color: #f1f5f9;
 }
-
 .card-title {
     font-family: "Orbitron", sans-serif;
-    margin-bottom: 0.75rem;
-    letter-spacing: 1px;
-    position: relative;
-    display: inline-block;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    margin-bottom: 1.25rem; 
 }
-
-.card-title::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent;
-    -webkit-text-stroke: 0.5px;
-    filter: blur(3px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.carousel-card.is-active .card-title::after {
-    opacity: 0.8;
-}
-
-.card-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(241, 245, 249, 0.8);
-    font-weight: 300;
-}
-
-/* Colores de Títulos */
-.text-cyan-400 {
-    color: #22d3ee;
-}
-
-.text-blue-400 {
-    color: #60a5fa;
-}
-
-.text-purple-400 {
-    color: #c084fc;
-}
-
-.text-pink-400 {
-    color: #f472b6;
-}
-
+.text-cyan-400 { color: var(--color-diego); }
+.text-purple-400 { color: var(--color-sofia); }
 .title-gradient {
-    background-image: linear-gradient(to right, #60a5fa, #c084fc);
+    background-image: linear-gradient(to right, var(--color-diego), var(--color-sofia));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
-
 .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(12, 74, 110, 0.3);
-    color: #38bdf8;
-    border: 1px solid rgba(14, 165, 233, 0.4);
-    border-radius: 50%;
+    background: none;
+    border: none;
     width: 48px;
     height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     z-index: 20;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
-
-.carousel-button:hover {
-    background-color: rgba(14, 165, 233, 0.3);
-    color: #e0f2fe;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+.carousel-button svg {
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
 }
-
-.carousel-button.prev {
-    left: -24px;
+.carousel-button:hover svg {
+    color: var(--color-sofia);
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px var(--glow-sofia));
 }
-
-.carousel-button.next {
-    right: -24px;
-}
-
+.carousel-button.prev { left: -15px; }
+.carousel-button.next { right: -15px; }
 .carousel-indicators {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     margin-top: 2rem;
 }
-
 .indicator {
-    width: 24px;
-    height: 4px;
-    background: rgba(56, 189, 248, 0.2);
-    border-radius: 2px;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
 .indicator.active {
-    background: #38bdf8;
-    box-shadow: 0 0 10px #38bdf8;
+    background-image: linear-gradient(90deg, var(--color-diego), var(--color-sofia));
+    box-shadow: 0 0 12px var(--glow-sofia), 0 0 12px var(--glow-diego);
+    transform: scale(1.15);
 }
-
 @media (max-width: 768px) {
-    .carousel-button {
-        width: 40px;
-        height: 40px;
-    }
-
-    .carousel-button.prev {
-        left: 5px;
-    }
-
-    .carousel-button.next {
-        right: 5px;
-    }
-
+    .carousel-button.prev { left: -5px; }
+    .carousel-button.next { right: -5px; }
     .carousel-card {
-        min-width: 260px;
-        max-width: 260px;
-        margin: 0 15px;
+        min-width: 280px; 
+        max-width: 280px;
     }
-
-    .carousel-card:not(.is-active) {
-        transform: scale(0.85) rotateY(25deg);
-    }
-
-    .carousel-card.is-prev {
-        transform: scale(0.8) rotateY(30deg) translateX(-40px);
-    }
-
-    .carousel-card.is-next {
-        transform: scale(0.8) rotateY(-30deg) translateX(40px);
-    }
-
-    .card-image-container {
-        height: 160px;
-    }
-}
-
-/* --- ESTILOS PERSONALIZADOS PARA SOMBRAS DE PASATIEMPOS --- */
-
-/* Anula la sombra por defecto para las tarjetas de Sofía cuando están inactivas */
-.carousel-card.sofia {
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(192, 132, 252, 0.15);
-}
-
-/* Anula la sombra por defecto para las tarjetas comunes cuando están inactivas */
-.carousel-card.comun {
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.1), 0 0 30px rgba(192, 132, 252, 0.1);
-}
-
-/* Estilo para la tarjeta activa de Sofía (sombra morada) */
-.carousel-card.sofia.is-active {
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-secondary), inset 0 0 20px rgba(192, 132, 252, 0.1);
-}
-
-/* Estilo para la tarjeta activa en común (combinación de sombras) */
-.carousel-card.comun.is-active {
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
-        0 0 45px var(--glow-primary),
-        0 0 65px var(--glow-secondary);
 }

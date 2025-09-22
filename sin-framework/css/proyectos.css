@@ -1,5 +1,4 @@
-/* --- ESTILOS SECCIÓN PROYECTOS --- */
-/* --- ESTILOS SECCIÓN PROYECTOS (ACTUALIZADO) --- */
+/* --- ESTILOS SECCIÓN PROYECTOS (ACTUALIZADO Y MEJORADO) --- */
 #proyectos {
     background-image: url('../assets/images/estudios.png');
     background-size: cover;
@@ -12,10 +11,9 @@
     padding: 100px 5%;
     color: #fff;
     position: relative;
-    z-index: 4; /* Aumentamos z-index */
+    z-index: 4;
 }
 
-/* Transición de desvanecimiento superior */
 #proyectos::before {
     content: '';
     position: absolute;
@@ -41,13 +39,13 @@
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    gap: 40px; /* Aumentamos el espacio entre tarjetas */
     width: 100%;
     max-width: 1200px;
     z-index: 2;
+    perspective: 1000px; /* Añadimos perspectiva para el efecto 3D */
 }
 
-/* Tarjetas preparadas para la animación */
 .project-card {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(94, 234, 212, 0.2);
@@ -57,18 +55,36 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    /* --- Propiedades para la animación --- */
     opacity: 0;
     transform: translateY(50px);
     transition: transform 0.6s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+    position: relative; /* Necesario para el efecto de resplandor */
+    overflow: hidden; /* Oculta el resplandor fuera de la tarjeta */
+}
+
+/* Efecto de resplandor (glow) */
+.project-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(94, 234, 212, 0.3), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none; /* Asegura que no interfiera con el mouse */
+}
+
+.project-card:hover::before {
+    opacity: 1;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.03); /* Levanta y escala la tarjeta */
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(94, 234, 212, 0.3);
 }
 
-/* Clase que activa la animación */
 .project-card.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -87,7 +103,7 @@
 
 .project-icon {
     font-size: 2rem;
-    color: #22d3ee; /* Color cian neón */
+    color: #22d3ee;
 }
 
 .project-title {
@@ -100,7 +116,7 @@
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(241, 245, 249, 0.85);
-    flex-grow: 1; /* Hace que la descripción ocupe el espacio disponible */
+    flex-grow: 1;
     margin-bottom: 25px;
 }
 
@@ -115,7 +131,7 @@
 
 .project-tech-list li {
     background-color: rgba(14, 165, 233, 0.15);
-    color: #93c5fd; /* Azul claro */
+    color: #93c5fd;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -127,7 +143,7 @@
     color: #f0f0f0;
     text-decoration: none;
     font-weight: 700;
-    align-self: flex-start; /* Se alinea a la izquierda */
+    align-self: flex-start;
     transition: color 0.3s ease;
     display: inline-flex;
     align-items: center;
@@ -135,7 +151,7 @@
 }
 
 .project-link:hover {
-    color: #60a5fa; /* Azul claro para el hover */
+    color: #60a5fa;
 }
 
 .project-link i {
@@ -146,14 +162,12 @@
     transform: translateX(3px) translateY(-3px);
 }
 
-
-/* --- RESPONSIVE DESIGN PARA PROYECTOS --- */
 @media (max-width: 768px) {
     #proyectos {
         padding: 60px 4%;
     }
     .projects-grid {
-        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+        grid-template-columns: 1fr;
         gap: 25px;
     }
 }

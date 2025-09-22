@@ -181,4 +181,29 @@ document.addEventListener('DOMContentLoaded', () => {
             moveToSlide(2); // Inicia en la tarjeta del medio
         }, 100);
     }
+
+     // --- 6. LÓGICA DE TARJETAS DE PROYECTO INTERACTIVAS ---
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Para el efecto de resplandor
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+
+            // Para el efecto de inclinación 3D
+            const rotateX = (rect.height / 2 - y) / 20; // Ajusta el divisor para más/menos inclinación
+            const rotateY = (x - rect.width / 2) / 20;
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateY(-10px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Resetea la inclinación al salir
+            card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1) translateY(0)';
+        });
+    });
 });
