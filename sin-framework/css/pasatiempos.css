@@ -1,27 +1,29 @@
-/* --- ESTILOS SECCIÓN PASATIEMPOS --- */
+/* --- ESTILOS SECCIÓN PASATIEMPOS (VERSIÓN CORREGIDA Y AJUSTADA) --- */
 
-/* --- Variables de Color para Personalización --- */
 :root {
-    --color-diego: #38bdf8;       /* Azul Cian Vibrante */
-    --color-sofia: #a855f7;       /* Morado Eléctrico */
+    --color-diego: #38bdf8;
+    --color-sofia: #a855f7;
     --glow-diego: rgba(56, 189, 248, 0.7);
     --glow-sofia: rgba(168, 85, 247, 0.7);
 }
 
-/* (El resto del código general de la sección se mantiene igual...) */
-
+/* CAMBIO 1: Se aumenta el padding superior para que la navbar no tape el título */
 #pasatiempos {
     background-image: url('../assets/images/estudios.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
     z-index: 3;
+    /* Aumentamos el padding superior y definimos uno inferior para mejor balance */
+    padding: 180px 5% 80px; 
 }
+
 
 #pasatiempos::before {
     content: '';
@@ -39,7 +41,7 @@
     max-width: 1100px;
     position: relative;
     perspective: 2000px;
-    padding: 3rem 0;
+    padding: 2rem 0; /* Reducimos padding vertical para compensar */
     z-index: 10;
     opacity: 0;
     transform: translateY(50px);
@@ -57,23 +59,40 @@
     transform-style: preserve-3d;
 }
 
+/* CAMBIO 3: Se reduce el tamaño de las tarjetas */
 .carousel-card {
-    min-width: 340px;
-    max-width: 340px;
-    margin: 0 25px;
+    min-width: 320px;
+    max-width: 320px;
+    margin: 0 20px; /* Menos margen lateral */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-    /* CAMBIO: Se ajusta la transición base para que no interfiera con el nuevo hover */
     transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
     transform-origin: center center;
     position: relative;
 }
 
-/* (El resto del código de las tarjetas se mantiene igual...) */
+/* (El resto del código de hover y efectos de las tarjetas se mantiene igual) */
+.carousel-card.is-active {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease-out,
+                filter 0.4s ease-out;
+}
+.carousel-card.is-active:hover {
+    transform: translateY(-15px) scale(1.05);
+}
+.carousel-card.diego.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-diego);
+}
+.carousel-card.sofia.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-sofia);
+}
+.carousel-card.comun.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 70px var(--glow-diego), 0 0 90px var(--glow-sofia);
+}
 
 .carousel-card.is-active {
     filter: saturate(1.1) brightness(1.1);
@@ -106,48 +125,13 @@
     z-index: 20;
 }
 
-/* ===== INICIO DE LA NUEVA SECCIÓN DE ANIMACIÓN INTERACTIVA ===== */
 
-/* 
-  Añadimos una transición específica para la tarjeta activa.
-  Esto hace que la animación al pasar el cursor sea rápida y suave (0.4s),
-  sin afectar la animación más lenta del carrusel al cambiar de tarjeta.
-*/
-.carousel-card.is-active {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                box-shadow 0.4s ease-out,
-                filter 0.4s ease-out;
-}
-
-/* 
-  Este es el efecto que se activa al pasar el cursor (hover) 
-  sobre la tarjeta que está en el centro.
-*/
-.carousel-card.is-active:hover {
-    /* 1. La levantamos 15px y la hacemos un 5% más grande */
-    transform: translateY(-15px) scale(1.05);
-}
-
-/* 2. Hacemos que la sombra y el brillo se expandan para un efecto dramático */
-.carousel-card.diego.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-diego);
-}
-.carousel-card.sofia.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-sofia);
-}
-.carousel-card.comun.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 70px var(--glow-diego), 0 0 90px var(--glow-sofia);
-}
-
-/* ===== FIN DE LA NUEVA SECCIÓN DE ANIMACIÓN INTERACTIVA ===== */
-
-
-/* (El resto del código del contenido y controles se mantiene igual...) */
+/* CAMBIO 3.1: Se reduce la altura de la imagen y el padding del contenido */
 .card-image-container {
     position: relative;
-    height: 210px;
+    height: 190px;
     overflow: hidden;
-    border-bottom: none; 
+    border-bottom: none;
 }
 .card-image {
     width: 100%;
@@ -159,14 +143,14 @@
     transform: scale(1.05);
 }
 .card-content {
-    padding: 1.75rem;
+    padding: 1.5rem;
     color: #f1f5f9;
 }
 .card-title {
     font-family: "Orbitron", sans-serif;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 1.25rem; 
+    margin-bottom: 1rem; 
 }
 .text-cyan-400 { color: var(--color-diego); }
 .text-purple-400 { color: var(--color-sofia); }
