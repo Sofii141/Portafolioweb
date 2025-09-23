@@ -1,4 +1,15 @@
-/* --- ESTILOS SECCIÓN PASATIEMPOS (VERSIÓN CORREGIDA Y AJUSTADA) --- */
+/**
+ * =================================================================
+ * Hoja de Estilos para la Sección de Pasatiempos (pasatiempos.css)
+ * -----------------------------------------------------------------
+ * Contiene los estilos para el carrusel 3D interactivo, incluyendo
+ * las tarjetas, transformaciones, animaciones y controles.
+ * =================================================================
+ */
+
+/* =================================================================
+   1. Variables de Color Específicas de la Sección
+   ================================================================= */
 
 :root {
     --color-diego: #38bdf8;
@@ -7,24 +18,23 @@
     --glow-sofia: rgba(168, 85, 247, 0.7);
 }
 
-/* CAMBIO 1: Se aumenta el padding superior para que la navbar no tape el título */
+/* =================================================================
+   2. Estructura y Layout Principal de la Sección
+   ================================================================= */
+
 #pasatiempos {
-    background-image: url('../assets/images/estudios.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: transparent; /* Hereda el fondo del contenedor <main> */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; /* Oculta las tarjetas que se salen del contenedor */
     position: relative;
     z-index: 3;
-    /* Aumentamos el padding superior y definimos uno inferior para mejor balance */
-    padding: 180px 5% 80px; 
+    padding: 180px 5% 80px;
 }
 
-
+/* Pseudo-elemento para la transición de desvanecimiento superior */
 #pasatiempos::before {
     content: '';
     position: absolute;
@@ -36,13 +46,19 @@
     z-index: 1;
 }
 
+/* =================================================================
+   3. Contenedor y Pista del Carrusel
+   ================================================================= */
+
 .carousel-container {
     width: 90%;
     max-width: 1100px;
     position: relative;
-    perspective: 2000px;
-    padding: 2rem 0; /* Reducimos padding vertical para compensar */
+    perspective: 2000px; /* Activa la perspectiva 3D para los elementos hijos */
+    padding: 2rem 0;
     z-index: 10;
+    
+    /* Estado inicial para la animación de entrada */
     opacity: 0;
     transform: translateY(50px);
     transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease;
@@ -56,61 +72,97 @@
 .carousel-track {
     display: flex;
     transition: transform 0.75s cubic-bezier(0.21, 0.61, 0.35, 1);
-    transform-style: preserve-3d;
+    transform-style: preserve-3d; /* Esencial para que las transformaciones 3D de las tarjetas funcionen */
 }
 
-/* CAMBIO 3: Se reduce el tamaño de las tarjetas */
+/* =================================================================
+   4. Estilos de las Tarjetas del Carrusel
+   ================================================================= */
+
 .carousel-card {
     min-width: 320px;
     max-width: 320px;
-    margin: 0 20px; /* Menos margen lateral */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    margin: 0 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
-    transform-origin: center center;
     position: relative;
+    transform-origin: center center;
+    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.21, 0.61, 0.35, 1);
+    
+    /* Se convierte la tarjeta en un contenedor flex para alinear verticalmente su contenido */
+    display: flex;
+    flex-direction: column;
 }
 
-/* (El resto del código de hover y efectos de las tarjetas se mantiene igual) */
-.carousel-card.is-active {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                box-shadow 0.4s ease-out,
-                filter 0.4s ease-out;
+/* --- Contenido Interno de las Tarjetas --- */
+
+.card-image-container {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    flex-shrink: 0; /* Evita que la imagen se encoja si el texto es largo */
 }
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s ease, filter 0.5s ease;
+}
+
+/* Efecto de zoom suave en la imagen de la tarjeta activa */
+.carousel-card.is-active .card-image {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 1.5rem;
+    color: #ffffff;
+    flex-grow: 1; /* Permite que este bloque ocupe el espacio vertical restante */
+}
+
+.card-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    
+    /* Reseteo para asegurar un estilo de texto sólido y consistente */
+    background-image: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+/* =================================================================
+   5. Estilos de Transformación y Estado del Carrusel
+   ================================================================= */
+
+/* --- Tarjeta Activa (Central) --- */
+.carousel-card.is-active {
+    transform: scale(1) rotateY(0) translateZ(0);
+    opacity: 1;
+    z-index: 20;
+    filter: saturate(1.1) brightness(1.1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease-out, filter 0.4s ease-out;
+}
+
 .carousel-card.is-active:hover {
     transform: translateY(-15px) scale(1.05);
 }
-.carousel-card.diego.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-diego);
-}
-.carousel-card.sofia.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 80px var(--glow-sofia);
-}
-.carousel-card.comun.is-active:hover {
-    box-shadow: 0 35px 70px rgba(0,0,0,0.4), 0 0 70px var(--glow-diego), 0 0 90px var(--glow-sofia);
-}
 
-.carousel-card.is-active {
-    filter: saturate(1.1) brightness(1.1);
-}
-.carousel-card.diego.is-active {
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-diego);
-}
-.carousel-card.sofia.is-active {
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-sofia);
-}
-.carousel-card.comun.is-active {
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 45px var(--glow-diego), 0 0 65px var(--glow-sofia);
-}
+/* --- Tarjetas Inactivas (Laterales) --- */
 .carousel-card:not(.is-active) {
     transform: scale(0.8) rotateY(35deg) translateZ(-100px);
     opacity: 0.45;
     filter: saturate(0.6) brightness(0.7);
 }
+
+/* Ajustes específicos para las tarjetas inmediatamente anterior y siguiente */
 .carousel-card.is-prev {
     transform-origin: right center;
     transform: scale(0.75) rotateY(45deg) translateX(-80px) translateZ(-150px);
@@ -119,47 +171,49 @@
     transform-origin: left center;
     transform: scale(0.75) rotateY(-45deg) translateX(80px) translateZ(-150px);
 }
-.carousel-card.is-active {
-    transform: scale(1) rotateY(0) translateZ(0);
-    opacity: 1;
-    z-index: 20;
+
+/* =================================================================
+   6. Personalización por Tipo de Tarjeta (Fondos y Sombras)
+   ================================================================= */
+
+/* --- Fondos del Contenido --- */
+.carousel-card.diego .card-content {
+    background: rgba(0, 85, 255, 0.25);
+}
+.carousel-card.sofia .card-content {
+    background: rgba(84, 40, 162, 0.3);
+}
+.carousel-card.comun .card-content {
+    background: linear-gradient(to right, rgba(0, 85, 255, 0.25), rgba(84, 40, 162, 0.3));
+}
+
+/* --- Sombras de la Tarjeta Activa --- */
+.carousel-card.diego.is-active {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 45px var(--glow-diego);
+}
+.carousel-card.sofia.is-active {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 45px var(--glow-sofia);
+}
+.carousel-card.comun.is-active {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 45px var(--glow-diego), 0 0 65px var(--glow-sofia);
+}
+
+/* --- Sombras de Hover en la Tarjeta Activa --- */
+.carousel-card.diego.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4), 0 0 80px var(--glow-diego);
+}
+.carousel-card.sofia.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4), 0 0 80px var(--glow-sofia);
+}
+.carousel-card.comun.is-active:hover {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4), 0 0 70px var(--glow-diego), 0 0 90px var(--glow-sofia);
 }
 
 
-/* CAMBIO 3.1: Se reduce la altura de la imagen y el padding del contenido */
-.card-image-container {
-    position: relative;
-    height: 190px;
-    overflow: hidden;
-    border-bottom: none;
-}
-.card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.5s ease, filter 0.5s ease;
-}
-.carousel-card.is-active .card-image {
-    transform: scale(1.05);
-}
-.card-content {
-    padding: 1.5rem;
-    color: #f1f5f9;
-}
-.card-title {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 1rem; 
-}
-.text-cyan-400 { color: var(--color-diego); }
-.text-purple-400 { color: var(--color-sofia); }
-.title-gradient {
-    background-image: linear-gradient(to right, var(--color-diego), var(--color-sofia));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
+/* =================================================================
+   7. Controles del Carrusel (Botones e Indicadores)
+   ================================================================= */
+
 .carousel-button {
     position: absolute;
     top: 50%;
@@ -172,25 +226,30 @@
     z-index: 20;
     transition: all 0.3s ease;
 }
+
 .carousel-button svg {
     width: 100%;
     height: 100%;
     color: rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease;
 }
+
 .carousel-button:hover svg {
     color: var(--color-sofia);
     transform: scale(1.2);
     filter: drop-shadow(0 0 10px var(--glow-sofia));
 }
+
 .carousel-button.prev { left: -15px; }
 .carousel-button.next { right: -15px; }
+
 .carousel-indicators {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 2rem;
 }
+
 .indicator {
     width: 12px;
     height: 12px;
@@ -199,16 +258,23 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .indicator.active {
     background-image: linear-gradient(90deg, var(--color-diego), var(--color-sofia));
     box-shadow: 0 0 12px var(--glow-sofia), 0 0 12px var(--glow-diego);
     transform: scale(1.15);
 }
+
+/* =================================================================
+   8. Media Queries para Diseño Responsivo
+   ================================================================= */
+
 @media (max-width: 768px) {
     .carousel-button.prev { left: -5px; }
     .carousel-button.next { right: -5px; }
+
     .carousel-card {
-        min-width: 280px; 
+        min-width: 280px;
         max-width: 280px;
     }
 }

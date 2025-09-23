@@ -1,26 +1,64 @@
+/**
+ * =================================================================
+ * Script para la Sección de Contacto (contacto.js)
+ * -----------------------------------------------------------------
+ * Gestiona la lógica del formulario de contacto, incluyendo la
+ * validación de campos, el almacenamiento de datos (CRUD) a través
+ * de una fachada, y la interacción con componentes de UI como
+ * el modal de confirmación y las notificaciones toast.
+ * Este script es de tipo módulo, importando la fachada de contacto.
+ * =================================================================
+ * @module contacto
+ */
+
 import { ContactFacade } from './contact/ContactFacade.js';
 
-// --- INICIALIZACIÓN ---
-// Se ejecuta una vez que el DOM está completamente cargado.
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Creamos una única instancia de nuestra Fachada.
-    const facade = new ContactFacade();
 
-    // --- REFERENCIAS A ELEMENTOS DEL DOM ---
+    /**
+     * -----------------------------------------------------------------
+     * 1. INICIALIZACIÓN Y REFERENCIAS AL DOM
+     * -----------------------------------------------------------------
+     * Se obtiene una única instancia de la fachada y se cachean todas
+     * las referencias a elementos del DOM para un acceso eficiente.
+     */
+
+    const facade = new ContactFacade();
+    
+    // Referencias al formulario y sus elementos
     const form = document.getElementById('contact-form');
-    const formMessages = document.getElementById('form-messages');
+    const fieldsToValidate = form.querySelectorAll('input[required], select[required], textarea[required]');
+    
+    // Referencias a la lista de contactos
     const contactList = document.getElementById('contact-list');
     const contactItemTemplate = document.getElementById('contact-item-template');
     const borrarTodoBtn = document.getElementById('borrar-todo-btn');
-
-    // --- FUNCIONES ---
+    
+    // Referencias a los componentes de UI (Modal y Toast)
+    const modalOverlay = document.getElementById('custom-modal-overlay');
+    const modalMessage = document.getElementById('modal-message');
+    const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+    const modalCancelBtn = document.getElementById('modal-cancel-btn');
+    const toast = document.getElementById('toast-notification');
+    const toastMessage = document.getElementById('toast-message');
+    const toastIcon = document.getElementById('toast-icon');
+    
+    /** @type {number} */
+    let toastTimeout; // ID del temporizador para las notificaciones toast.
 
     /**
-     * Renderiza la lista de contactos en el DOM.
+     * -----------------------------------------------------------------
+     * 2. LÓGICA DE RENDERIZADO Y MANIPULACIÓN DEL DOM
+     * -----------------------------------------------------------------
+     */
+
+    /**
+     * Renderiza la lista completa de contactos en la interfaz,
+     * utilizando una plantilla HTML para cada ítem.
+     * Muestra un mensaje si la lista está vacía.
+     * @returns {void}
      */
     function renderContactList() {
-        // Limpiamos la lista actual para evitar duplicados.
         contactList.innerHTML = '';
         const contacts = facade.listarContactos();
 
@@ -33,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         contacts.forEach(contact => {
-            // Usamos la plantilla HTML para crear el elemento de la lista.
             const clone = contactItemTemplate.content.cloneNode(true);
             const li = clone.querySelector('.contact-item');
             
@@ -48,60 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
             contactList.appendChild(clone);
         });
     }
-    
-    /**
-     * Valida el formulario y muestra mensajes de error.
-     * @returns {boolean} - true si el formulario es válido, false en caso contrario.
-     */
-    function validateForm() {
-        let isValid = true;
-        // Limpiamos errores previos.
-        form.querySelectorAll('.error-message').forEach(span => span.textContent = '');
-        form.querySelectorAll('.is-invalid').forEach(input => input.classList.remove('is-invalid'));
-        
-        // Función auxiliar para mostrar errores.
-        const showError = (fieldId, message) => {
-            isValid = false;
-            const field = document.getElementById(fieldId);
-            field.classList.add('is-invalid');
-            const errorSpan = field.nextElementSibling;
-            if (errorSpan && errorSpan.classList.contains('error-message')) {
-                errorSpan.textContent = message;
-            }
-        };
-
-        // Validaciones
-        if (!form.nombre.value.trim()) showError('nombre', 'El nombre es obligatorio.');
-        if (!form.email.value.trim()) {
-            showError('email', 'El email es obligatorio.');
-        } else if (!/^\S+@\S+\.\S+$/.test(form.email.value)) {
-            showError('email', 'El formato del email no es válido.');
-        }
-        if (!form.motivo.value) showError('motivo', 'Debes seleccionar un motivo.');
-        if (!form.mensaje.value.trim()) showError('mensaje', 'El mensaje es obligatorio.');
-        if (!form.aceptaTerminos.checked) showError('aceptaTerminos', 'Debes aceptar los términos y condiciones.');
-
-        return isValid;
-    }
 
     /**
-     * Muestra un mensaje de éxito o error general del formulario.
-     * @param {string} message - El mensaje a mostrar.
-     * @param {string} type - 'success' o 'error'.
-     */
-    function showFormMessage(message, type = 'success') {
-        formMessages.textContent = message;
-        formMessages.className = `form-message ${type}`;
-        // El mensaje desaparece después de 4 segundos.
-        setTimeout(() => {
-            formMessages.textContent = '';
-            formMessages.className = 'form-message';
-        }, 4000);
-    }
-    
-    /**
-     * Carga los datos de un contacto en el formulario para su edición.
+     * Carga los datos de un contacto existente en el formulario para su edición.
      * @param {string} id - El ID del contacto a editar.
+     * @returns {void}
      */
     function editContact(id) {
         const contact = facade.obtenerContactoParaEditar(id);
@@ -116,53 +104,184 @@ document.addEventListener('DOMContentLoaded', () => {
             form.querySelector(`input[name="preferenciaContacto"][value="${contact.preferenciaContacto}"]`).checked = true;
             
             form.querySelector('button[type="submit"]').textContent = 'Actualizar Contacto';
-            window.location.hash = '#contacto'; // Nos desplazamos a la sección de contacto.
+            window.location.hash = '#contacto'; // Desplaza la vista al formulario.
         }
     }
 
-
-    // --- MANEJADORES DE EVENTOS ---
+    /**
+     * -----------------------------------------------------------------
+     * 3. LÓGICA DE VALIDACIÓN DEL FORMULARIO
+     * -----------------------------------------------------------------
+     */
 
     /**
-     * Maneja el envío del formulario.
+     * Muestra un mensaje de error visual para un campo específico.
+     * @param {HTMLElement} field - El elemento del formulario que falló la validación.
+     * @param {string} message - El mensaje de error a mostrar.
      */
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevenimos el envío real del formulario.
+    function showFieldError(field, message) {
+        field.classList.add('is-invalid');
+        const errorSpan = field.closest('.form-group').querySelector('.error-message');
+        if (errorSpan) errorSpan.textContent = message;
+    }
 
-        if (!validateForm()) {
-            showFormMessage('Por favor, corrige los errores del formulario.', 'error');
-            return;
+    /**
+     * Limpia el mensaje de error visual de un campo.
+     * @param {HTMLElement} field - El elemento del formulario.
+     */
+    function clearFieldError(field) {
+        field.classList.remove('is-invalid');
+        const errorSpan = field.closest('.form-group').querySelector('.error-message');
+        if (errorSpan) errorSpan.textContent = '';
+    }
+
+    /**
+     * Valida un único campo del formulario según sus atributos y tipo.
+     * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} field - El campo a validar.
+     * @returns {boolean} - `true` si el campo es válido, `false` en caso contrario.
+     */
+    function validateField(field) {
+        clearFieldError(field); // Limpia errores previos antes de revalidar.
+        let isValid = true;
+
+        if (field.type === 'checkbox') {
+            if (!field.checked) {
+                showFieldError(field, 'Debes aceptar los términos y condiciones.');
+                isValid = false;
+            }
+        } else {
+            const value = field.value.trim();
+            if (!value) {
+                showFieldError(field, 'Este campo es obligatorio.');
+                isValid = false;
+            } else if (field.type === 'email' && !/^\S+@\S+\.\S+$/.test(value)) {
+                showFieldError(field, 'El formato del email no es válido.');
+                isValid = false;
+            } else if (field.id === 'telefono' && !/^\d{10}$/.test(value)) {
+                showFieldError(field, 'El teléfono debe contener 10 dígitos.');
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+
+    /**
+     * Itera y valida todos los campos requeridos del formulario.
+     * @returns {boolean} - `true` si todo el formulario es válido.
+     */
+    function validateForm() {
+        let isFormValid = true;
+        fieldsToValidate.forEach(field => {
+            if (!validateField(field)) isFormValid = false;
+        });
+        return isFormValid;
+    }
+
+    /**
+     * -----------------------------------------------------------------
+     * 4. COMPONENTES DE UI PERSONALIZADOS (TOAST Y MODAL)
+     * -----------------------------------------------------------------
+     */
+
+    /**
+     * Muestra una notificación Toast en la pantalla.
+     * @param {string} message - El mensaje a mostrar.
+     * @param {'success'|'error'|'info'} [type='info'] - El tipo de notificación.
+     */
+    function showToast(message, type = 'info') {
+        clearTimeout(toastTimeout);
+        toastMessage.textContent = message;
+
+        toast.className = '';
+        toastIcon.className = 'fas';
+
+        if (type === 'success') {
+            toast.classList.add('success');
+            toastIcon.classList.add('fa-check-circle');
+        } else if (type === 'error') {
+            toast.classList.add('error');
+            toastIcon.classList.add('fa-exclamation-circle');
+        } else {
+            toastIcon.classList.add('fa-info-circle');
         }
 
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    /**
+     * Muestra un modal de confirmación y devuelve una Promesa.
+     * La promesa se resuelve a `true` si el usuario confirma, o `false` si cancela.
+     * @param {string} message - La pregunta a mostrar en el modal.
+     * @returns {Promise<boolean>} - La decisión del usuario.
+     */
+    function showConfirmationModal(message) {
+        return new Promise(resolve => {
+            modalMessage.textContent = message;
+            modalOverlay.classList.remove('hidden');
+
+            const cleanup = () => {
+                modalConfirmBtn.removeEventListener('click', handleConfirm);
+                modalCancelBtn.removeEventListener('click', handleCancel);
+            };
+
+            const handleConfirm = () => {
+                modalOverlay.classList.add('hidden');
+                cleanup();
+                resolve(true);
+            };
+
+            const handleCancel = () => {
+                modalOverlay.classList.add('hidden');
+                cleanup();
+                resolve(false);
+            };
+
+            modalConfirmBtn.addEventListener('click', handleConfirm);
+            modalCancelBtn.addEventListener('click', handleCancel);
+        });
+    }
+
+    /**
+     * -----------------------------------------------------------------
+     * 5. MANEJADORES DE EVENTOS (EVENT LISTENERS)
+     * -----------------------------------------------------------------
+     */
+
+    // Evento para el envío del formulario.
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!validateForm()) {
+            showToast('Por favor, corrige los errores del formulario.', 'error');
+            return;
+        }
+        
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        // El checkbox no se incluye si no está marcado, lo manejamos manualmente.
         data.aceptaTerminos = form.aceptaTerminos.checked;
-
+        
         const isUpdating = !!data.id;
         facade.guardarContacto(data);
         
-        showFormMessage(isUpdating ? '¡Contacto actualizado con éxito!' : '¡Contacto guardado con éxito!', 'success');
+        showToast(isUpdating ? '¡Contacto actualizado con éxito!' : '¡Contacto guardado con éxito!', 'success');
         form.reset();
-        form.querySelector('button[type="submit"]').textContent = 'Guardar Contacto';
         renderContactList();
     });
-    
-    /**
-     * Maneja el clic en el botón de limpiar formulario.
-     */
+
+    // Evento para limpiar el formulario.
     form.addEventListener('reset', () => {
-        form.querySelectorAll('.error-message').forEach(span => span.textContent = '');
-        form.querySelectorAll('.is-invalid').forEach(input => input.classList.remove('is-invalid'));
+        fieldsToValidate.forEach(field => clearFieldError(field));
         form.querySelector('button[type="submit"]').textContent = 'Guardar Contacto';
         form.id.value = '';
     });
 
-    /**
-     * Maneja los clics en la lista de contactos (para editar o eliminar).
-     * Usamos delegación de eventos para mayor eficiencia.
-     */
-    contactList.addEventListener('click', (event) => {
+    // Evento 'blur' para validación en tiempo real al salir de un campo.
+    fieldsToValidate.forEach(field => {
+        field.addEventListener('blur', () => validateField(field));
+    });
+
+    // Evento de clic en la lista de contactos (usando delegación de eventos).
+    contactList.addEventListener('click', async (event) => {
         const target = event.target;
         const contactItem = target.closest('.contact-item');
         if (!contactItem) return;
@@ -174,26 +293,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (target.classList.contains('delete-btn')) {
-            if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
+            const confirmed = await showConfirmationModal('¿Estás seguro de que quieres eliminar este contacto?');
+            if (confirmed) {
                 facade.eliminarContacto(contactId);
                 renderContactList();
-                showFormMessage('Contacto eliminado.', 'success');
+                showToast('Contacto eliminado.', 'success');
             }
         }
     });
-    
-    /**
-     * Maneja el clic en el botón de "Borrar Todo".
-     */
-    borrarTodoBtn.addEventListener('click', () => {
-        if (confirm('¿Estás seguro de que quieres eliminar TODOS los contactos? Esta acción no se puede deshacer.')) {
+
+    // Evento para el botón de "Borrar Todo".
+    borrarTodoBtn.addEventListener('click', async () => {
+        const confirmed = await showConfirmationModal('¿Estás seguro de que quieres eliminar TODOS los contactos? Esta acción no se puede deshacer.');
+        if (confirmed) {
             facade.borrarTodo();
             renderContactList();
-            showFormMessage('Todos los contactos han sido eliminados.', 'success');
+            showToast('Todos los contactos han sido eliminados.', 'success');
         }
     });
 
-    // --- EJECUCIÓN INICIAL ---
-    // Renderizamos la lista de contactos por primera vez al cargar la página.
+    /**
+     * -----------------------------------------------------------------
+     * 6. EJECUCIÓN INICIAL
+     * -----------------------------------------------------------------
+     */
+
+    // Renderiza la lista de contactos por primera vez al cargar la página.
     renderContactList();
 });

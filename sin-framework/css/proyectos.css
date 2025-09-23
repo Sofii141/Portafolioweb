@@ -1,18 +1,30 @@
-/* --- ESTILOS SECCIÓN PROYECTOS (ACTUALIZADO Y MEJORADO) --- */
+/**
+ * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ * Hoja de Estilos para la Sección de Proyectos (proyectos.css)
+ * -----------------------------------------------------------------
+ * Contiene los estilos específicos para el layout de cuadrícula,
+ * las tarjetas de proyecto y sus efectos interactivos de 
+ * resplandor y 3D en la sección #proyectos.
+ * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ */
 
-/* --- Variables de Color para Personalización --- */
+/* =================================================================
+   1. Variables de Color Específicas de la Sección
+   ================================================================= */
+
 :root {
-    --color-diego: #38bdf8;       /* Azul Cian Vibrante */
-    --color-sofia: #a855f7;       /* Morado Eléctrico */
+    --color-diego: #38bdf8;
+    --color-sofia: #a855f7;
     --glow-diego: rgba(56, 189, 248, 0.4);
     --glow-sofia: rgba(168, 85, 247, 0.5);
 }
 
+/* =================================================================
+   2. Estructura y Layout Principal de la Sección
+   ================================================================= */
+
 #proyectos {
-    background-image: url('../assets/images/estudios.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: transparent; /* Hereda el fondo del contenedor <main> */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,6 +35,7 @@
     z-index: 4;
 }
 
+/* Pseudo-elemento para la transición de desvanecimiento superior */
 #proyectos::before {
     content: '';
     position: absolute;
@@ -34,19 +47,13 @@
     z-index: 1;
 }
 
-#proyectos .section-title {
-    font-family: var(--font-principal, 'Poppins', sans-serif);
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 50px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
-    position: relative;
-    z-index: 2;
-}
+/* =================================================================
+   3. Cuadrícula de Proyectos (Projects Grid)
+   ================================================================= */
 
 .projects-grid {
     display: grid;
+    /* Crea columnas flexibles que se ajustan automáticamente al espacio disponible */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 40px;
     width: 100%;
@@ -54,23 +61,45 @@
     z-index: 2;
 }
 
+/* =================================================================
+   4. Estilos de las Tarjetas de Proyecto
+   ================================================================= */
+
 .project-card {
     background: rgba(30, 41, 59, 0.6);
-    border: 1px solid rgba(168, 85, 247, 0.2); /* Borde sutil con tono morado */
+    border: 1px solid rgba(168, 85, 247, 0.2);
     border-radius: 15px;
     padding: 30px;
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden; /* Oculta el resplandor que se sale de los bordes */
+    
+    /* Se usa Flexbox para que el contenido se distribuya verticalmente
+       y el footer (enlace) se alinee correctamente. */
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+    /* Estado inicial para la animación de entrada */
     opacity: 0;
     transform: translateY(50px);
     transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease, border-color 0.4s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-/* ===== INICIO DE CAMBIOS: Efecto de resplandor (glow) mejorado ===== */
+/* Clase añadida por JS para activar la animación de entrada */
+.project-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Retraso escalonado en la animación de entrada para las tarjetas */
+.project-card:nth-child(2) { transition-delay: 0.1s; }
+.project-card:nth-child(3) { transition-delay: 0.2s; }
+
+/* --- Efectos Interactivos de Hover y Resplandor --- */
+
+/* Pseudo-elemento que crea el resplandor circular que sigue al cursor */
 .project-card::before {
     content: '';
     position: absolute;
@@ -78,40 +107,32 @@
     top: 0;
     width: 100%;
     height: 100%;
-    /* 1. MEJORA CLAVE: Gradiente radial que combina ambos colores para un efecto "aura" */
+    /* El gradiente se posiciona usando variables CSS (--x, --y) actualizadas por JS */
     background: radial-gradient(
         circle at var(--x, 50%) var(--y, 50%), 
-        var(--glow-sofia),          /* Morado de Sofi en el centro */
-        rgba(56, 189, 248, 0.35),   /* Azul de Diego difuminado */
-        transparent 50%             /* Transición a transparente más amplia */
+        var(--glow-sofia),
+        rgba(56, 189, 248, 0.35),
+        transparent 50%
     );
-    opacity: 0;
+    opacity: 0; /* Oculto por defecto */
     transition: opacity 0.4s ease-in-out;
-    pointer-events: none;
+    pointer-events: none; /* Permite que los eventos del ratón pasen a través de él */
 }
 
 .project-card:hover::before {
-    opacity: 1;
+    opacity: 1; /* Muestra el resplandor al hacer hover */
 }
 
 .project-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    /* 2. MEJORA CLAVE: Sombra que combina los dos resplandores para mayor cohesión */
+    transform: translateY(-12px) scale(1.03); /* Efecto de elevación */
+    /* Sombra de neón combinada */
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 
-                0 0 25px var(--glow-sofia), /* Resplandor morado más intenso */
-                0 0 40px var(--glow-diego); /* Resplandor azul más amplio */
-    border-color: rgba(168, 85, 247, 0.5); /* El borde se ilumina al pasar el cursor */
-}
-/* ===== FIN DE CAMBIOS ===== */
-
-
-.project-card.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+                0 0 25px var(--glow-sofia),
+                0 0 40px var(--glow-diego);
+    border-color: rgba(168, 85, 247, 0.5); /* El borde se ilumina */
 }
 
-.project-card:nth-child(2) { transition-delay: 0.1s; }
-.project-card:nth-child(3) { transition-delay: 0.2s; }
+/* --- Contenido Interno de la Tarjeta --- */
 
 .project-header {
     display: flex;
@@ -120,14 +141,13 @@
     margin-bottom: 20px;
 }
 
-/* 3. MEJORA CLAVE: Iconos con gradiente y resplandor */
 .project-icon {
-    font-size: 2.5rem; /* Un poco más grande para que el gradiente se aprecie */
+    font-size: 2.5rem;
+    /* Técnica para aplicar un gradiente al texto del ícono */
     background-image: linear-gradient(45deg, var(--color-sofia), var(--color-diego));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; /* Ocultamos el color original para mostrar el fondo */
-    /* Añadimos un resplandor sutil que coincide con el gradiente */
+    color: transparent;
     filter: drop-shadow(0 0 8px var(--glow-sofia));
 }
 
@@ -141,17 +161,17 @@
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(241, 245, 249, 0.85);
-    flex-grow: 1;
+    flex-grow: 1; /* Ocupa el espacio vertical disponible, empujando el enlace hacia abajo */
     margin-bottom: 25px;
 }
 
 .project-tech-list {
     list-style: none;
+    padding-left: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
-    padding-left: 0;
 }
 
 .project-tech-list li {
@@ -165,14 +185,14 @@
 }
 
 .project-link {
-    color: #f0f0f0;
     text-decoration: none;
     font-weight: 700;
-    align-self: flex-start;
-    transition: color 0.3s ease;
+    align-self: flex-start; /* Se alinea al inicio del contenedor flex */
+    transition: filter 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    /* Técnica de texto con gradiente */
     background-image: linear-gradient(to right, var(--color-sofia), var(--color-diego));
     -webkit-background-clip: text;
     background-clip: text;
@@ -184,18 +204,24 @@
 }
 
 .project-link i {
-    color: #a855f7; /* Para que la flecha tenga un color base */
+    color: var(--color-sofia); /* Color base del ícono */
     transition: transform 0.3s ease;
 }
 
 .project-link:hover i {
-    transform: translateX(3px) translateY(-3px);
+    transform: translateX(3px) translateY(-3px); /* Efecto de "salida" */
 }
+
+/* =================================================================
+   5. Media Queries para Diseño Responsivo
+   ================================================================= */
 
 @media (max-width: 768px) {
     #proyectos {
         padding: 60px 4%;
     }
+
+    /* En pantallas pequeñas, las tarjetas se apilan en una sola columna */
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 25px;

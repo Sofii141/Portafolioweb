@@ -1,12 +1,35 @@
-/* --- ESTILOS CARRUSEL --- */
-/* css/inicio.css */
-#inicio { 
-    background: #0a0118; /* Un fondo oscuro coherente por si acaso */
-    overflow: hidden;
-    /* Las propiedades 'position: sticky', 'top' y 'z-index' han sido eliminadas */
+/**
+ * =================================================================
+ * Hoja de Estilos para la Sección de Inicio (inicio.css)
+ * -----------------------------------------------------------------
+ * Contiene todos los estilos para el slider de presentación,
+ * incluyendo el posicionamiento de los slides, las animaciones de
+ * texto (efecto máquina de escribir) y la transición entre perfiles.
+ * =================================================================
+ */
+
+/* =================================================================
+   1. Configuración Base de la Sección
+   ================================================================= */
+
+#inicio {
+    background: #0a0118; /* Fondo oscuro base en caso de que la imagen no cargue */
+    overflow: hidden;    /* Asegura que los elementos animados no se salgan de la sección */
 }
 
-.slider { width: 100%; height: 100%; position: relative; list-style-type: none; }
+/* =================================================================
+   2. Layout y Posicionamiento del Slider
+   ================================================================= */
+
+/* Contenedor principal de los slides */
+.slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    list-style-type: none;
+}
+
+/* Estilo base para cada slide (item) */
 .item {
     position: absolute;
     z-index: 1;
@@ -14,51 +37,83 @@
     background-size: cover;
     transition: transform 0.2s, left 0.75s, top 0.75s, width 0.75s, height 0.75s, opacity 0.5s ease;
 }
-.item:nth-child(1) { left: 0; top: 0; width: 100%; height: 100%; transform: none; border-radius: 0; }
-.item:nth-child(2) { left: calc(50% + 120px); top: 50%; width: 200px; height: 300px; transform: translateY(-50%); border-radius: 20px; }
-.item:nth-child(n+3) { opacity: 0; pointer-events: none; }
-.slider.hiding-preview .item:nth-child(2) { opacity: 0; }
 
-/* --- CONTENIDO DEL SLIDE --- */
+/* Estilo para el slide ACTIVO (el primero en el DOM) */
+.item:nth-child(1) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+}
+
+/* Estilo para el slide de VISTA PREVIA (el segundo en el DOM) */
+.item:nth-child(2) {
+    left: calc(50% + 120px);
+    top: 50%;
+    width: 200px;
+    height: 300px;
+    transform: translateY(-50%);
+    border-radius: 20px;
+}
+
+/* Oculta cualquier slide que no sea el activo o la vista previa */
+.item:nth-child(n+3) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Clase de ayuda para ocultar la vista previa durante la transición */
+.slider.hiding-preview .item:nth-child(2) {
+    opacity: 0;
+}
+
+/* =================================================================
+   3. Contenido de Texto Dentro de los Slides
+   ================================================================= */
+
 .content {
-    width: min(50vw, 600px);
+    width: min(50vw, 600px); /* Ancho adaptable con un máximo de 600px */
     position: absolute;
     top: 50%;
     left: 10%;
     transform: translateY(-50%);
     color: white;
-    text-shadow: 0 3px 8px rgba(0,0,0,0.7);
-    opacity: 0;
-    display: none;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
     text-align: left;
+    display: none; /* Oculto por defecto, se muestra solo en el slide activo */
+    opacity: 0;
     transition: opacity 0.5s ease-out;
 }
 
-/* MODIFICACIÓN: La foto de perfil debe ser visible desde el inicio, sin animación */
 .personal-photo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     border: 4px solid rgba(255, 255, 255, 0.8);
     margin-bottom: 1.5rem;
-    opacity: 0; /* Por defecto estará oculta */
+    opacity: 0; /* Oculta por defecto para animar su entrada */
 }
 
-/* --- TÍTULO CON FUENTE CURSIVA Y ANIMACIÓN DE ESCRITURA --- */
 .content .title {
     font-family: 'Great Vibes', cursive;
     font-size: 5rem;
     font-weight: 500;
     line-height: 1.2;
     text-transform: none;
+    color: white;
+
+    /* Propiedades para la animación de máquina de escribir */
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     border-right: 4px solid rgba(255, 255, 255, 0.75);
-    color: white;
 }
 
-.title.sofia, .title.diego {
+/* Reseteo para asegurar que los títulos no hereden estilos de texto con gradiente */
+.title.sofia,
+.title.diego {
     background-image: none;
     -webkit-background-clip: unset;
     background-clip: unset;
@@ -67,8 +122,7 @@
 
 .content .birth-date {
     font-size: 1.1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
     font-style: italic;
     opacity: 0;
 }
@@ -79,54 +133,51 @@
     opacity: 0;
 }
 
-/* --- ANIMACIONES DE APARICIÓN --- */
+/* =================================================================
+   4. Animaciones de Entrada del Contenido
+   ================================================================= */
+
+/* Muestra el contenido solo para el slide activo */
 .item:nth-child(1) .content {
     display: block;
     opacity: 1;
 }
 
-/* AÑADIDO: Hacemos que la foto aparezca inmediatamente y se quede fija */
 .item:nth-child(1) .personal-photo {
     opacity: 1;
-    transition: opacity 0.5s ease-out; /* Una transición suave para que no aparezca de golpe */
+    transition: opacity 0.5s ease-out;
 }
 
+/* Aplica la animación de escritura a los títulos del slide activo */
 .item:nth-child(1) .title.sofia {
     animation: typing 2.5s steps(20), blink 0.7s step-end infinite alternate;
 }
-
 .item:nth-child(1) .title.diego {
     animation: typing 2.5s steps(19), blink 0.7s step-end infinite alternate;
 }
 
-/* MODIFICACIÓN: La animación ahora solo se aplica a la fecha y descripción */
+/* Aplica la animación de aparición al resto del texto, con un retraso */
 .item:nth-child(1) .birth-date,
 .item:nth-child(1) .description {
     animation: fadeInAfterTyping 1s ease-out 2.8s forwards;
 }
 
+/* Oculta el contenido cuando el slide está en transición de salida */
 .item.fade-out .content {
     opacity: 0;
 }
 
-/* Keyframes para la animación de escritura (typing) */
+/* --- Definición de Keyframes para las Animaciones --- */
+
 @keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+    from { width: 0; }
+    to { width: 100%; }
 }
 
-/* Keyframes para el cursor parpadeante (blink) */
 @keyframes blink {
-    50% {
-        border-right-color: transparent;
-    }
+    50% { border-right-color: transparent; }
 }
 
-/* Keyframes para que el resto del contenido aparezca después */
 @keyframes fadeInAfterTyping {
     from {
         opacity: 0;
@@ -138,21 +189,79 @@
     }
 }
 
-.slider-nav { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 5; user-select: none; display: flex; gap: 1rem; }
-.slider-nav .btn { background-color: rgba(255, 255, 255, 0.25); color: white; border: none; border-radius: 50%; cursor: pointer; width: 60px; height: 60px; font-size: 1.8rem; font-weight: 300; transition: background-color 0.3s ease; display: flex; justify-content: center; align-items: center; }
-.slider-nav .btn:hover { background-color: rgba(255, 255, 255, 0.4); }
+/* =================================================================
+   5. Controles de Navegación y Capa de Transición
+   ================================================================= */
 
-/* --- ESTILOS OVERLAY --- */
-.transition-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; opacity: 0; pointer-events: none; }
+.slider-nav {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    user-select: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.slider-nav .btn {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-nav .btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Capa de color que aparece durante la transición entre slides */
+.transition-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+}
 .transition-overlay.blue { background: linear-gradient(180deg, #0033FF, #0600AB, #00033D); }
 .transition-overlay.purple { background: linear-gradient(180deg, #977DFF, #5428a2); }
-.transition-overlay.active { animation: fadeInOut 1s ease-in-out; }
-@keyframes fadeInOut { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
 
-/* --- RESPONSIVE DESIGN --- */
+.transition-overlay.active {
+    animation: fadeInOut 1s ease-in-out;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* =================================================================
+   6. Media Queries para Diseño Responsivo
+   ================================================================= */
+
 @media (max-width: 768px) {
-    .content { left: 5%; width: 90%; }
-    .content .title { font-size: 3rem; }
-    .content .description { font-size: 1rem; }
-    .item:nth-child(2) { display: none; }
+    .content {
+        left: 5%;
+        width: 90%;
+    }
+    .content .title {
+        font-size: 3rem;
+    }
+    .content .description {
+        font-size: 1rem;
+    }
+    /* Oculta la vista previa del siguiente slide en pantallas pequeñas */
+    .item:nth-child(2) {
+        display: none;
+    }
 }

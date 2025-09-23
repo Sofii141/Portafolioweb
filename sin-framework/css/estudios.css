@@ -1,77 +1,64 @@
-/* --- SECCIÓN ESTUDIOS (CÓDIGO FINAL CON TRANSICIÓN) --- */
+/**
+ * =================================================================
+ * Hoja de Estilos para la Sección de Estudios (estudios.css)
+ * -----------------------------------------------------------------
+ * Contiene todos los estilos específicos para el layout, tarjetas
+ * y tablas de la sección #estudios.
+ * =================================================================
+ */
+
+/* =================================================================
+   1. Estructura y Layout Principal de la Sección
+   ================================================================= */
+
 #estudios {
-    background-image: url('../assets/images/estudios.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: transparent; /* Hereda el fondo del contenedor <main> */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 180px 5% 120px;
     color: #fff;
-    position: relative; /* Importante para el z-index */
+    position: relative;
     overflow: hidden;
-    /* 1. MEJORA CLAVE: Z-INDEX SUPERIOR */
-    z-index: 2; /* Se posicionará por encima de la sección #inicio */
+    z-index: 2;
 }
 
-/* 2. MEJORA CLAVE: TRANSICIÓN DE DESVANECIMIENTO */
+/* Pseudo-elemento para crear una transición de desvanecimiento en la parte superior,
+   asegurando una fusión suave con la sección anterior. */
 #estudios::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 40vh; /* Aumentamos la altura para un desvanecimiento más suave y largo */
-    background: linear-gradient(180deg, 
-        #0a0118 20%,       /* Empieza con un color sólido para cubrir bien */
-        rgba(10, 1, 24, 0) 100% /* Termina en transparente */
-    );
-    z-index: 1;
+    height: 40vh;
+    background: linear-gradient(180deg, #0a0118 20%, rgba(10, 1, 24, 0) 100%);
+    z-index: 1; /* Se posiciona entre el fondo y el contenido */
 }
 
-/* Animación de nebulosa (sin cambios) */
-.nebula-bg {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(151, 125, 255, 0.15), rgba(0, 51, 255, 0.1) 70%, transparent 100%);
-    animation: rotate-nebula 30s linear infinite;
-    z-index: 0;
-}
-@keyframes rotate-nebula {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Título de la sección con la nueva fuente */
+/* El título de la sección se define en main.css, pero se ajusta su z-index
+   para que esté por encima del desvanecimiento superior. */
 #estudios .section-title {
-    font-family: var(--font-principal, 'Poppins', sans-serif);
-    font-size: 3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 50px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
-    position: relative;
-    z-index: 2; /* Por encima del gradiente de desvanecimiento */
+    z-index: 2;
 }
 
-/* Contenedor y tarjetas (sin cambios en su mayoría) */
+/* =================================================================
+   2. Contenedor de Tarjetas de Estudio
+   ================================================================= */
+
 .studies-container {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: stretch; /* Asegura que ambas tarjetas tengan la misma altura */
     gap: 40px;
     width: 100%;
     max-width: 1400px;
     position: relative;
-    z-index: 2; /* Por encima del gradiente de desvanecimiento */
+    z-index: 2;
 }
 
+/* Estilo base para cada tarjeta de estudio */
 .study-card {
     width: 48%;
     padding: 30px 35px;
@@ -80,15 +67,19 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid transparent;
     transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    
+    /* Estado inicial para la animación de entrada */
     opacity: 0;
     transform: translateY(50px);
 }
 
+/* Clase añadida por JS para activar la animación de entrada */
 .study-card.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* Efectos de hover específicos para cada tarjeta */
 .sofia-card:hover {
     transform: translateY(-10px);
     border-color: rgba(225, 198, 255, 0.7);
@@ -100,40 +91,132 @@
     box-shadow: 0 0 30px rgba(80, 150, 255, 0.4);
 }
 
-
-/* --- RESTO DEL CÓDIGO (SIN CAMBIOS) --- */
+/* =================================================================
+   3. Estilos de la Tabla de Contenido
+   ================================================================= */
 
 .study-card h3 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 25px;
     text-align: center;
+    /* Técnica para aplicar un gradiente al texto */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.study-card table { width: 100%; border-collapse: collapse; }
-.study-card th, .study-card td { padding: 16px 10px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.study-card thead th { font-weight: 700; font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-.study-card tbody tr:last-child td { border-bottom: none; }
-.study-card tbody tr { transition: background-color 0.3s ease; }
-.study-card tbody tr:hover { background-color: rgba(255, 255, 255, 0.05); }
-.level-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; font-size: 0.9rem; }
-.icon-level { font-size: 1.5rem; opacity: 0.8; }
-.study-card td strong { font-size: 1.1rem; font-weight: 600; color: #ffffff; display: block; }
-.study-card td small { font-size: 0.9rem; color: #cccccc; font-weight: 400; }
 
-.sofia-card { background: rgba(84, 40, 162, 0.25); transition-delay: 0.2s; }
-.sofia-card h3 { background-image: linear-gradient(135deg, #f2e6ee, #c3a1ff); }
-.sofia-card thead { background: linear-gradient(to right, rgba(195, 161, 255, 0.2), rgba(151, 125, 255, 0.2)); }
+.study-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-.diego-card { background: rgba(0, 51, 255, 0.2); }
-.diego-card h3 { background-image: linear-gradient(135deg, #89d1ff, #0055ff); }
-.diego-card thead { background: linear-gradient(to right, rgba(0, 51, 255, 0.2), rgba(6, 0, 171, 0.2)); }
+.study-card th,
+.study-card td {
+    padding: 16px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.study-card thead th {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.study-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.study-card tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.study-card tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Celda especial para el nivel de estudio con ícono */
+.level-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.icon-level {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.study-card td strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+}
+
+.study-card td small {
+    font-size: 0.9rem;
+    color: #cccccc;
+    font-weight: 400;
+}
+
+/* =================================================================
+   4. Personalización de Color por Tarjeta
+   ================================================================= */
+
+/* Estilos para la tarjeta de Sofía (tonos morados) */
+.sofia-card {
+    background: rgba(84, 40, 162, 0.25);
+    transition-delay: 0.2s; /* Pequeño retraso en la animación de entrada */
+}
+.sofia-card h3 {
+    background-image: linear-gradient(135deg, #f2e6ee, #c3a1ff);
+}
+.sofia-card thead {
+    background: linear-gradient(to right, rgba(195, 161, 255, 0.2), rgba(151, 125, 255, 0.2));
+}
+
+/* Estilos para la tarjeta de Diego (tonos azules) */
+.diego-card {
+    background: rgba(0, 51, 255, 0.2);
+}
+.diego-card h3 {
+    background-image: linear-gradient(135deg, #89d1ff, #0055ff);
+}
+.diego-card thead {
+    background: linear-gradient(to right, rgba(0, 51, 255, 0.2), rgba(6, 0, 171, 0.2));
+}
+
+/* =================================================================
+   5. Media Queries para Diseño Responsivo
+   ================================================================= */
 
 @media (max-width: 900px) {
-    #estudios .section-title { font-size: 2rem; letter-spacing: 3px; }
-    .studies-container { flex-direction: column; align-items: center; gap: 30px; }
-    .study-card { width: 90%; max-width: 500px; }
-    .sofia-card { transition-delay: 0s; }
+    #estudios .section-title {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .studies-container {
+        flex-direction: column; /* Apila las tarjetas verticalmente */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .study-card {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    /* Se elimina el retraso en móvil para una carga más rápida */
+    .sofia-card {
+        transition-delay: 0s;
+    }
 }

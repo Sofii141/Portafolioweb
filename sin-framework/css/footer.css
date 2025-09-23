@@ -1,36 +1,58 @@
-/* --- ESTILOS DEL FOOTER (VERSIÓN REDISEÑADA) --- */
+/**
+ * =================================================================
+ * Hoja de Estilos para el Pie de Página (footer.css)
+ * -----------------------------------------------------------------
+ * Contiene todos los estilos para la sección final del portafolio,
+ * incluyendo la estructura de columnas, información de contacto,
+ * enlaces a redes sociales y la barra inferior de derechos.
+ * =================================================================
+ */
 
-/* Contenedor principal que soluciona el scroll-snap */
+/* =================================================================
+   1. Contenedor Principal y Estructura Base
+   ================================================================= */
+
+/* Contenedor wrapper para resolver problemas de scroll-snap y posicionamiento */
 .footer-container {
-    background-color: #0a0118;
-    padding-top: 50px; 
+    background-color: #0a0118; /* Color sólido que coincide con las transiciones */
+    padding-top: 50px; /* Espacio superior para separar visualmente */
 }
 
+/* Estilo principal del pie de página */
 .main-footer {
     background: linear-gradient(180deg, #0a0118, #1a0d2d, #0a0118);
     color: #f1f5f9;
-    padding: 70px 5% 25px; 
+    padding: 70px 5% 25px;
     font-family: var(--font-principal);
     position: relative;
     z-index: 10;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3); /* Sombra superior sutil */
 }
+
+/* =================================================================
+   2. Layout de Columnas con CSS Grid
+   ================================================================= */
 
 .footer-content {
     display: grid;
-    /* MEJORA: Grid de 3 columnas. La primera es más ancha. */
-    grid-template-columns: 1.5fr 1fr 1fr; 
-    gap: 50px; /* Espacio entre columnas */
+    /* Define una cuadrícula de 3 columnas: la primera es 1.5 veces más ancha que las otras dos. */
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 0 auto; /* Centra el contenido */
     padding-bottom: 50px;
 }
 
 .footer-section {
-    min-width: 0; /* Necesario para que el grid funcione bien */
+    min-width: 0; /* Soluciona problemas de desbordamiento en contenedores grid */
 }
 
+/* =================================================================
+   3. Estilos de Contenido del Footer
+   ================================================================= */
+
+/* Títulos de cada sección del footer */
 .footer-section h3 {
     font-size: 1.8rem;
     font-weight: 700;
@@ -39,7 +61,7 @@
     padding-bottom: 10px;
 }
 
-/* Línea decorativa debajo de los títulos */
+/* Línea decorativa animada debajo de los títulos */
 .footer-section h3::after {
     content: '';
     position: absolute;
@@ -50,7 +72,9 @@
     border-radius: 2px;
 }
 
-/* Estilo para el título "[Sofi y Diego]" */
+/* --- Personalización de Colores por Sección --- */
+
+/* Título principal "[Sofi y Diego]" con gradiente */
 .footer-section.about h3 {
     background-image: linear-gradient(90deg, var(--color-sofia), var(--color-diego));
     -webkit-background-clip: text;
@@ -62,23 +86,44 @@
     background: linear-gradient(90deg, var(--color-sofia), var(--color-diego));
 }
 
-/* Estilo para el título "Contacto Sofía" */
+/* Títulos y elementos de "Contacto Sofía" (morado) */
 .contact-sofia h3 { color: var(--color-sofia); }
 .contact-sofia h3::after { background: var(--color-sofia); }
-.contact-sofia p i { color: var(--color-sofia) !important; }
+.contact-sofia p i { color: var(--color-sofia); }
 
-/* Estilo para el título "Contacto Diego" */
+/* Títulos y elementos de "Contacto Diego" (azul) */
 .contact-diego h3 { color: var(--color-diego); }
 .contact-diego h3::after { background: var(--color-diego); }
-.contact-diego p i { color: var(--color-diego) !important; }
+.contact-diego p i { color: var(--color-diego); }
+
+
+/* --- Párrafos e Información de Contacto --- */
 
 .footer-section.about p {
     font-size: 1rem;
     line-height: 1.7;
     color: rgba(241, 245, 249, 0.8);
     margin-bottom: 25px;
-    max-width: 450px; /* Evita que el texto sea demasiado ancho */
+    max-width: 450px;
 }
+
+.footer-section.contact-info p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(241, 245, 249, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-section.contact-info p i {
+    font-size: 1.2rem;
+    width: 20px; /* Ancho fijo para alinear verticalmente los iconos */
+    text-align: center;
+}
+
+/* --- Enlaces a Redes Sociales --- */
 
 .social-links {
     display: flex;
@@ -122,21 +167,9 @@
     box-shadow: 0 0 20px var(--glow-diego);
 }
 
-.footer-section.contact-info p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: rgba(241, 245, 249, 0.8);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.footer-section.contact-info p i {
-    font-size: 1.2rem;
-    width: 20px; /* Alinea los iconos */
-    text-align: center;
-}
+/* =================================================================
+   4. Barra Inferior del Footer (Derechos Reservados)
+   ================================================================= */
 
 .footer-bottom {
     text-align: center;
@@ -146,27 +179,31 @@
     color: rgba(241, 245, 249, 0.6);
 }
 
-/* --- RESPONSIVE DEL FOOTER --- */
+/* =================================================================
+   5. Media Queries para Diseño Responsivo
+   ================================================================= */
+
 @media (max-width: 950px) {
+    /* En tablets, las columnas de contacto se apilan debajo de la de 'about' */
     .footer-content {
-        /* En pantallas medianas, 1 columna ancha y 1 de contactos */
         grid-template-columns: 1fr 1fr;
     }
     .footer-section.about {
-        /* La sección 'about' ocupa ambas columnas */
-        grid-column: 1 / 3;
+        grid-column: 1 / 3; /* La sección 'about' ocupa todo el ancho */
     }
 }
 
 @media (max-width: 600px) {
+    /* En móviles, todas las secciones se apilan en una sola columna */
     .footer-content {
-        /* En pantallas pequeñas, todo en una sola columna */
         grid-template-columns: 1fr;
         text-align: center;
     }
     .footer-section.about {
-        grid-column: auto; /* Resetea el span de columna */
+        grid-column: auto; /* Resetea la expansión de columna */
     }
+    
+    /* Centra los elementos que estaban alineados a la izquierda */
     .footer-section h3::after {
         left: 50%;
         transform: translateX(-50%);
