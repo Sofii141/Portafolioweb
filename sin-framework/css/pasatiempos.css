@@ -82,7 +82,7 @@
 .carousel-card {
     min-width: 320px;
     max-width: 320px;
-    margin: 0 20px;
+    margin: 0 10px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -129,7 +129,7 @@
     font-family: "Orbitron", sans-serif;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
     color: #ffffff;
     
     /* Reseteo para asegurar un estilo de texto sólido y consistente */
@@ -247,7 +247,7 @@
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .indicator {
