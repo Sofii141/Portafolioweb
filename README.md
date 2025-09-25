@@ -1,6 +1,6 @@
 # Portafolio Personal [Sofi y Diego] - Versión Nativa
 
-Este es un proyecto académico desarrollado para la asignatura **Ingeniería del Software 3** de la **Universidad del Cauca**. El objetivo principal es la creación de una página web personal de tipo "Single Page Application" (SPA), aplicando conocimientos en desarrollo web front-end con tecnologías puras y nativas: HTML5, CSS3 y JavaScript (ES6+), sin el uso de frameworks.
+Este es un proyecto académico desarrollado para la asignatura **Ingeniería del Software 3** y **Laboratorio de Ingeniería del Software 3** de la **Universidad del Cauca**. El objetivo principal es la creación de una página web personal de tipo "Single Page Application" (SPA), aplicando conocimientos en desarrollo web front-end con tecnologías puras y nativas: HTML5, CSS3 y JavaScript (ES6+), sin el uso de frameworks.
 
 ## ✒️ Autores
 
