@@ -1,5 +1,5 @@
-import { Contacto } from './Contacto.js';
-import { ContactRepository } from './ContactRepository.js';
+import { Contacto } from '../domain/Contacto.js';
+import { ContactRepository } from '../repository/ContactRepository.js';
 
 /**
  * Proporciona una interfaz simple y de alto nivel para interactuar con el sistema de contactos.

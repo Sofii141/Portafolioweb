@@ -11,7 +11,7 @@
  * @module contacto
  */
 
-import { ContactFacade } from './contact/ContactFacade.js';
+import { ContactFacade } from './contact/facade/ContactFacade.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
