@@ -127,8 +127,7 @@ sin-framework/
 │   ├── contacto.css          # Estilos para la sección Contacto
 │   └── footer.css            # Estilos para el pie de página
 └── js/
-    ├── script.js             # Lógica global (navegación, scrollspy, etc.)
-    ├── contacto.js           # Lógica UI del formulario de contacto
+    ├── app.js             # Lógica global
     └── contact/              # Módulo de contacto con patrones de diseño
         ├── domain/
         │   └── Contacto.js   # Modelo (la estructura de un contacto)
@@ -136,8 +135,8 @@ sin-framework/
         │   └── ContactRepository.js # Capa de datos (interactúa con localStorage)
         └── facade/
             └── ContactFacade.js # API simplificada para la UI
----
 ```
+---
 ## 🚀 Instrucciones de Uso
 
 Este proyecto no requiere de un servidor web ni de dependencias para funcionar.
