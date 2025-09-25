@@ -49,7 +49,7 @@ Este proyecto cumple con todos los puntos especificados en la guía de la asigna
 -   **JavaScript Funcional**:
     -   **Validación de Formulario**: El formulario de contacto valida todos los campos en tiempo real (al perder el foco) y al intentar enviarlo.
     -   **Carrusel de Imágenes**: La sección de Pasatiempos cuenta con un carrusel 3D totalmente funcional, creado con lógica de JavaScript nativo.
--   **CSS Personalizado**: Todos los estilos de la página son 100% personalizados, escritos desde cero.
+-   **CSS Personalizado**: Todos los estilos de la página son personalizados.
 -   **Personalización Clara**: El contenido, incluyendo fotos, textos y proyectos, es único y personal de los autores.
 
 ### Secciones Obligatorias
@@ -74,8 +74,8 @@ Este proyecto cumple con todos los puntos especificados en la guía de la asigna
 -   **HTML Semántico**: Se utilizó una estructura HTML clara con etiquetas semánticas como `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, etc.
 -   **CSS Puro**: No se utilizó ningún framework como Bootstrap o Tailwind.
 -   **JavaScript Nativo**: Toda la lógica interactiva fue implementada con JavaScript puro (vanilla JS), sin librerías externas como jQuery.
--   **NO Responsive (Desktop First)**: Siguiendo la especificación, el diseño está optimizado para visualizarse correctamente en pantallas de escritorio y no incluye `media queries` ni layouts adaptativos.
--   **Carrusel Manual**: La lógica del carrusel de pasatiempos fue desarrollada desde cero.
+-   **NO Responsive (Desktop First)**: Siguiendo la especificación, se utilizaron `media queries` pero  no es 100% responsive.
+-   **Carrusel Manual**: La lógica del carrusel de pasatiempos se partio de una plantilla.
 
 ---
 
